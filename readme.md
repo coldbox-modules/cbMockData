@@ -18,6 +18,7 @@ You can use this MockData object in several ways:
 
 1. Put it in your ColdFusion web server and call it directly via CFC method ` new MockData().mock()`) or via web method shown below.
 2. Startup a CommandBox server (`box server start`) and execute it via port: 3000
+3. Install it as a module in a ColdBox app and hit the service via `/mockdataCFC`
 
 To specify a port or change the port, just add it an argument:
 

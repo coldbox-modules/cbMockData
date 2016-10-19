@@ -12,7 +12,7 @@
     "bugs":"https://github.com/Ortus-Solutions/MockDataCFC/issues",
     "slug":"mockdatacfc",
     "shortDescription":"MockData is a simple service to generate fake JSON data via command line arguments",
-    "type":"projects",
+    "type":"modules",
     "keywords":[
         "Mock Data"
     ],
