@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.3.0
+* Added auto-incrementing ID's
+* Update on build control
+* Syntax Ortus Updates, addition of private methods
+* allow for use of `rand` or `rnd` for `num` generators
+* Add CORS support for ColdBox REST Module
+* Bug on `isDefault()` always returning true.
+* Added tests and automation
+
 ## 2.2.0
 * Made it a module as well for ColdBox apps.
 

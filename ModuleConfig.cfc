@@ -11,7 +11,7 @@ component {
 	this.author 			= "Luis Majano";
 	this.webURL 			= "https://www.ortussolutions.com";
 	this.description 		= "MockData is a simple service to generate fake JSON data";
-	this.version			= "2.2.0";
+	this.version			= "2.3.0";
 	// If true, looks for views in the parent first, if not found, then in the module. Else vice-versa
 	this.viewParentLookup 	= true;
 	// If true, looks for layouts in the parent first, if not found, then in module. Else vice-versa
@@ -51,6 +51,5 @@ component {
 	*/
 	function onUnload(){
 	}
-
 	
 }

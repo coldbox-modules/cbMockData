@@ -11,12 +11,11 @@
     },
     "bugs":"https://github.com/Ortus-Solutions/MockDataCFC/issues",
     "slug":"mockdatacfc",
-    "shortDescription":"MockData is a simple service to generate fake JSON data via command line arguments",
+    "shortDescription":"MockData is a simple service to generate fake JSON data via command line arguments, CFC calls or embedded RESTFul service",
     "type":"modules",
     "keywords":[
         "Mock Data"
     ],
-    "private":false,
     "contributors":[
         "Luis Majano <lmajano@ortussolutions.com>"
     ],
@@ -24,10 +23,10 @@
         
     },
     "devDependencies":{
-        
+        "testbox":"^2.4.0+80"
     },
     "installPaths":{
-        
+        "testbox":"testbox"
     },
     "scripts":{
         "postVersion":"package set location='Ortus-Solutions/MockDataCFC#v`package version`'",
@@ -35,6 +34,11 @@
     },
     "ignore":[
         "**/.*",
-        "tests"
-    ]
+        "tests",
+        "watch.cfm"
+    ],
+    "testbox":{
+        "runner":"http://localhost:3000/tests/runner.cfm",
+        "reporter":"mintext"
+    }
 }
