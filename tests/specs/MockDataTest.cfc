@@ -25,6 +25,12 @@ component extends="testbox.system.BaseSpec"{
 				expect(	r.len() ).toBe( 10 );
 			});
 
+			it( "can generate autoincrementing IDs", function(){
+				var r = mockDataCFC.mock( id="autoincrement" );
+				expect(	r[ 1 ].id ).toBe( 1 );
+				expect(	r[ 10 ].id ).toBe( 10 );
+			});
+
 			it( "can generate uuids", function(){
 				var r = mockDataCFC.mock( id="uuid" );
 				expect(	r[ 1 ].id ).toBeUUID();

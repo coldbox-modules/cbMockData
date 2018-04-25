@@ -107,6 +107,8 @@ gender: "male"
 
 ### Types
 
+`autoincrement` : Returns an incremented index
+
 `string`: Just returns string (not sure about this one)
 
 `name`: Generates a random name.

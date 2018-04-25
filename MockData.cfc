@@ -85,7 +85,7 @@ component {
 		// Generate restuls from field models and incoming numbers
 		var result = [];
 		for( var i=1; i <= arguments.num; i++ ){
-			result.append( generateNewItem( fieldModel ) );
+			result.append( generateNewItem( fieldModel, i ) );
 		}
 		
 		// If in Service mode, then add headers
@@ -111,8 +111,12 @@ component {
 	/**
 	 * Generate the fake data according to incoming type
 	 * @type The valid incoming fake data type
+	 * @index The index location of the fake iteration
 	 */
-	private function generateFakeData( required type ){
+	private function generateFakeData( required type, required index ){
+		if( type == "autoincrement" ){
+			return arguments.index;
+		}
 		if( type == "string"){ 
 			return "string"
 		};
@@ -173,12 +177,12 @@ component {
 	/**
 	 * Generate a new mocked item
 	 * @model A struct of name and type of the model to generate
+	 * @index The numerical index of the item being generated
 	 */
-	private struct function generateNewItem( required array model ) {
+	private struct function generateNewItem( required array model, required index ) {
 		var result = {};
-
 		arguments.model.each( function( field ){
-
+			
 			// Verify the field struct has a name, else generaate it
 			if( !field.keyExists( "name" ) ){
 				field.name = "field" & i;
@@ -194,9 +198,9 @@ component {
 			}
 
 			// Generate the fake data now.
-			result[ field.name ] = generateFakeData( field.type );
+			result[ field.name ] = generateFakeData( field.type, index );
 		} );
-		
+
 		return result;
 	}
 
