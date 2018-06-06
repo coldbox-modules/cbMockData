@@ -118,8 +118,8 @@ component {
 			return arguments.index;
 		}
 		if( type == "string"){ 
-			return "string"
-		};
+			return "string";
+		}
 		if( type == "uuid" ){
 			return createUUID();
 		}
