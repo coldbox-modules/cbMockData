@@ -1,9 +1,9 @@
 /**
-*********************************************************************************
-* Copyright Since 2005 ColdBox Framework by Luis Majano and Ortus Solutions, Corp
-* www.ortussolutions.com
-********************************************************************************
-*/
+ * Copyright 2013 Ortus Solutions, Corp
+ * www.ortussolutions.com
+ * ---
+ * Welcome to the world of Mocking Data
+ */
 component {
 
 	// Module Properties
@@ -11,7 +11,6 @@ component {
 	this.author 			= "Luis Majano";
 	this.webURL 			= "https://www.ortussolutions.com";
 	this.description 		= "MockData is a simple service to generate fake JSON data";
-	this.version			= "2.3.0";
 	// If true, looks for views in the parent first, if not found, then in the module. Else vice-versa
 	this.viewParentLookup 	= true;
 	// If true, looks for layouts in the parent first, if not found, then in module. Else vice-versa
@@ -43,7 +42,8 @@ component {
 	* Fired when the module is registered and activated.
 	*/
 	function onLoad(){
-		binder.map( "MockData@MockDataCFC" ).to( "#moduleMapping#.MockData" );
+		binder.map( "MockData@MockDataCFC" )
+			.to( "#moduleMapping#.MockData" );
 	}
 
 	/**

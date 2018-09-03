@@ -6,7 +6,7 @@ component extends="testbox.system.BaseSpec"{
 /*********************************** LIFE CYCLE Methods ***********************************/
 
 	function beforeAll(){
-		variables.mockdataCFC = new root.MockData();
+		variables.mockdataCFC = new mockdatacfc.MockData();
 	}
 
 	function afterAll(){

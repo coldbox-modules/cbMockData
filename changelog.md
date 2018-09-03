@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.5.0
+
+* ACF Compatibilities
+* Updated readmes and syntax updates for modern engines
+* Upgraded to new ColdBox module Harness
+
 ## 2.4.0
 
 * Added auto-incrementing ID's FOR REAL this time

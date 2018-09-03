@@ -1,8 +1,8 @@
 {
     "name":"MockDataCFC",
-    "version":"2.4.0",
-    "author":"Ray Camden",
-    "location":"Ortus-Solutions/MockDataCFC#v2.4.0",
+    "version":"@build.version@+@build.number@",
+    "location":"https://downloads.ortussolutions.com/ortussolutions/coldbox-modules/mockdatacfc/@build.version@/mockdatacfc-@build.version@.zip",
+    "author":"Ortus Solutions",
     "homepage":"https://github.com/Ortus-Solutions/MockDataCFC",
     "documentation":"https://github.com/Ortus-Solutions/MockDataCFC",
     "repository":{
@@ -17,26 +17,19 @@
         "Mock Data"
     ],
     "contributors":[
+		"Ray Camden",
         "Luis Majano <lmajano@ortussolutions.com>"
     ],
     "dependencies":{},
     "devDependencies":{
-        "testbox":"^2.4.0+80"
     },
     "installPaths":{
-        "testbox":"testbox"
     },
     "scripts":{
-        "postVersion":"package set location='Ortus-Solutions/MockDataCFC#v`package version`'",
-        "postPublish":"!git push --follow-tags"
     },
     "ignore":[
         "**/.*",
-        "tests",
-        "watch.cfm"
-    ],
-    "testbox":{
-        "runner":"http://localhost:3000/tests/runner.cfm",
-        "reporter":"mintext"
-    }
+        "test-harness",
+        "*/.md"
+    ]
 }
