@@ -21,7 +21,7 @@ Leverage CommandBox and type `box install mockdatacfc`
 
 Once installed you can leverage it in different ways:
 
-1. **CFC** : Install it into your CFML application, instantiate the `MockData.cfc` and call the `mock` method using the mocking argument DSL: `new mockdatacfc.MockData().mock()`.
+1. **CFC** : Install it into your CFML application, instantiate the `MockData.cfc` and call the `mock` method using the mocking argument DSL: `new mockdatacfc.models.MockData().mock()`.
 2. **REST Service** : Startup a CommandBox server in the root of the package once installed (`box server start`) and execute it via port: `3000`.  You can execute `GET` commands and pass the mocking DSL via the query string or execute a `POST` command with the mocking DSL as the body in JSON.
 3. **ColdBox Module** : Install it via CommandBox in a ColdBox app and hit the service via `/mockdataCFC` with a `GET` using the query string mocking DSL or a `POST` using the mocking DSL as the body in JSON.  You can also get access to the mocking instance via the WireBox ID: `MockData@MockDataCFC` and call the `mock` method using the mocking argument DSL.
 

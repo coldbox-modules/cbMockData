@@ -19,8 +19,6 @@ component {
 	this.entryPoint			= "MockDataCFC";
 	// Model Namespace
 	this.modelNamespace		= "MockDataCFC";
-	// Auto Map Models Directory
-	this.autoMapModels		= false;
 	// CF Mapping
 	this.cfmapping			= "MockDataCFC";
 
@@ -42,8 +40,6 @@ component {
 	* Fired when the module is registered and activated.
 	*/
 	function onLoad(){
-		binder.map( "MockData@MockDataCFC" )
-			.to( "#moduleMapping#.MockData" );
 	}
 
 	/**
