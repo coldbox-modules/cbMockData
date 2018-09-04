@@ -7,7 +7,7 @@ notifications:
 env:
   # Fill out these global variables for build process
   global:
-    - MODULE_ID=mockdatacfc
+    - MODULE_ID=MockDataCFC
     - TARGET_VERSION=2.5.0
   matrix:
     - ENGINE=lucee@45

@@ -1,7 +1,7 @@
 {
     "name":"MockDataCFC",
     "version":"@build.version@+@build.number@",
-    "location":"https://downloads.ortussolutions.com/ortussolutions/coldbox-modules/mockdatacfc/@build.version@/mockdatacfc-@build.version@.zip",
+    "location":"https://downloads.ortussolutions.com/ortussolutions/coldbox-modules/MockDataCFC/@build.version@/MockDataCFC-@build.version@.zip",
     "author":"Ortus Solutions",
     "homepage":"https://github.com/Ortus-Solutions/MockDataCFC",
     "documentation":"https://github.com/Ortus-Solutions/MockDataCFC",

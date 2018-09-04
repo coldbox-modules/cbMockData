@@ -1,12 +1,9 @@
-/**
-* This tests the BDD functionality in TestBox. This is CF10+, Railo4+
-*/
 component extends="testbox.system.BaseSpec"{
 
 /*********************************** LIFE CYCLE Methods ***********************************/
 
 	function beforeAll(){
-		variables.mockdataCFC = new mockdatacfc.MockData();
+		variables.mockdataCFC = new MockDataCFC.MockData();
 	}
 
 	function afterAll(){
