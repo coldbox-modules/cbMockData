@@ -88,7 +88,7 @@ component{
             .run();
 
         // Check Exit Code?
-        if( getExitCode() ){
+        if( shell.getExitCode() ){
             return error( "Cannot continue building, tests failed!" );
         }
     }
