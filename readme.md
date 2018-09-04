@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Ortus-Solutions/MockDataCFC.svg?branch=development)](https://travis-ci.org/Ortus-Solutions/MockDataCFC)
+
 # MockData CFC
 
 > This is a ColdFusion version of the [MockData](https://github.com/cfjedimaster/mockdata) Node.js service.
