@@ -1,18 +1,26 @@
-component extends="testbox.system.BaseSpec"{
+component extends="coldbox.system.testing.BaseTestCase" appMapping="root"{
 
 /*********************************** LIFE CYCLE Methods ***********************************/
 
 	function beforeAll(){
-		variables.mockdataCFC = new MockDataCFC.MockData();
+		super.beforeAll();
+		setup();
 	}
 
 	function afterAll(){
+		super.afterAll();
 	}
 
 /*********************************** BDD SUITES ***********************************/
 
 	function run(){
 		describe( "MockData CFC", function(){
+
+
+			beforeEach(function( currentSpec ){
+				variables.mockdataCFC = getInstance( "MockData@MockDataCFC" );
+			});
+
 			it( "can be created", function(){
 				expect(	mockDataCFC ).toBeComponent();
 			});

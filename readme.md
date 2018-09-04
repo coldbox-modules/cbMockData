@@ -1,8 +1,10 @@
 # MockData CFC
 
-This is a ColdFusion version of the [MockData](https://github.com/cfjedimaster/mockdata) Node.js service. 
+> This is a ColdFusion version of the [MockData](https://github.com/cfjedimaster/mockdata) Node.js service.
 
-MockData is a simple service to generate fake JSON data via command line arguments, a JSON REST service or a Service API. The idea being that you may be offline, may not have access to an API, or simply need some fake data to test something on your front end or seed a complete database with fake data.
+MockData is a simple service to generate fake JSON data as a JSON REST service, a ColdBox Module or a simple CFC Service API. The idea being that you may be offline, may not have access to an API, or simply need some fake data to test on your front end or seed a complete database with fake data.
+
+MockDataCFC allows you to define the return JSON model in a very deterministic and simple modeling DSL.  Read on :rocket: for some modeling goodness!
 
 ## Requirements
 
@@ -15,15 +17,15 @@ Leverage CommandBox and type `box install mockdatacfc`
 
 ## Usage
 
-Once installed you can leverage the API in different ways:
+Once installed you can leverage it in different ways:
 
-1. Put it in your ColdFusion web server and call it directly via CFC method ` new MockData().mock()`).
-2. Startup a CommandBox server in the root of the package once installed (`box server start`) and execute it via port: 3000
-3. Install it as a module in a ColdBox app and hit the service via `/mockdataCFC` or get access to the mocking instance via the WireBox ID: `MockData@MockDataCFC`
+1. **CFC** : Install it into your CFML application, instantiate the `MockData.cfc` and call the `mock` method using the mocking argument DSL: `new mockdatacfc.MockData().mock()`.
+2. **REST Service** : Startup a CommandBox server in the root of the package once installed (`box server start`) and execute it via port: `3000`.  You can execute `GET` commands and pass the mocking DSL via the query string or execute a `POST` command with the mocking DSL as the body in JSON.
+3. **ColdBox Module** : Install it via CommandBox in a ColdBox app and hit the service via `/mockdataCFC` with a `GET` using the query string mocking DSL or a `POST` using the mocking DSL as the body in JSON.  You can also get access to the mocking instance via the WireBox ID: `MockData@MockDataCFC` and call the `mock` method using the mocking argument DSL.
 
 ### Customizing the service port
 
-To specify a port or change the port, just add it an argument to the server start command or modify the `server.json` port configuration:
+To specify a port or change the port, just add it an argument to the `server start` command or modify the `server.json` port configuration to your liking.  You can even add SSL if you need to.
 
 ```
 box server start port=XXXX
@@ -31,118 +33,60 @@ box server start port=XXXX
 
 ### Getting Data
 
-To get data from the service, point your XHR at:
+To get data from the REST service, point your XHR or `cfhttp` calls to the following entry points and either pass the mocking DSL via the query string or as a JSON `POST` body.
 
 ```
+# Standalone Service
 http://localhost:3000/
+
+# ColdBox Module Service
+http://localhost:8080/mockdataCFC
 ```
 
-> Note: MockData uses CORS so if you're running a virtual domain then you will still be able to hit the service.(As long as you have a decent browser.)
+By default it will produce a glorious array of 10 objects of nothing! Since we did not specify any modeling data. So let's continue.
+
+> **Note:** MockData uses CORS so if you're running a virtual domain then you will still be able to hit the service.(As long as you have a decent browser.)
 
 ### Number of objects
 
-There are 2 types of arguments you pass to the object. The first is the number of objects you want returned via the `num` argument.
+The number of objects to be returned by the service is determined by the `$num` argument, which defaults to `10` items:
 
 ```js
 # service call
-http://localhost:3000/?num=10
+http://localhost:3000/?$num=5
 
-# object
+# ColdBox Module Service
+http://localhost:8080/mockdataCFC?$num=5
+
+# Module API
 var data = getInstance( "MockData@MockDataCFC" )
     .mock(
-        num = 10
+        $num = 5
     );
 ```
 
-By default, MockData will return **10** objects. You can also specify a random number by using the form: `rnd:X`
+#### Random Numbers
+
+You can also specify a random return number by using the following forms:
+
+* `$num:rand:10` - A random number between 1-10.
+* `$num:rand:5:20` - A random number between 5-20.
 
 ```js
-http://localhost:3000/?num=rnd:10
+# service call
+http://localhost:3000/?$num=rand:10
+
+# ColdBox Module Service
+http://localhost:8080/mockdataCFC?$num=rand:10
 
 # object
 var data = getInstance( "MockData@MockDataCFC" )
     .mock(
-        num = "rnd:10"
+        $num = "rnd:10:20"
     );
 ```
 
-This will return a random number of objects from 1 to 10. If you want to specify your own range, just use the form: `rnd:X:Y`
-
-```js
-http://localhost:3000/?num=rnd:5:10
-
-# object
-var data = getInstance( "MockData@MockDataCFC" )
-    .mock(
-        num = "rnd:5:10"
-    );
-```
-
-### Type of data
-
-In order to define the type of data returned, you must specify one or more additional query string variables or arguments. The form is `name=type`, where `name` will be the name used in the result and `type` is the type of data that we support. Here is a simple example:
-
-```js
-http://localhost:3000/?num=3&author=name
-
-# object
-var data = getInstance( "MockData@MockDataCFC" )
-    .mock(
-        num = 3,
-        author = "name"
-    );
-```
-
-This tells the service to return 3 objects with each containing an `author`field that has a type value of `name`. (More on types in a minute.) The result then would look something like this:
-
-```json
-[
-{
-author: "Frank Smith"
-},
-{
-author: "Gary Stroz"
-},
-{
-author: "Lynn Padgett"
-}
-]
-```
-
-Additional fields than can just be appended to the URL or method call:
-
-```json
-http://localhost:3000/?num=3&author=name&gender=oneof:male:female
-
-# object
-var data = getInstance( "MockData@MockDataCFC" )
-    .mock(
-        num = 3,
-        author = "name",
-        gender = "oneOf:male:female"
-    );
-```
-
-Which gives...
-
-```json
-[
-{
-author: "Lisa Padgett",
-gender: "male"
-},
-{
-author: "Roger Clapton",
-gender: "male"
-},
-{
-author: "Heather Degeneres",
-gender: "male"
-}
-]
-```
-
-### Types
+### Available Mocking Types
 
 The available types MockDataCFC supports are:
 
@@ -166,3 +110,174 @@ The available types MockDataCFC supports are:
 * `tel`: Generates a random (American) telephone number.
 * `uuid`: Generates a random UUID
 * `words`: Generates a single word. If used as `word:N`, returns N words.  If used as `words:X:Y`, returns a random number of words beetween X and Y.
+
+### Mocking DSL
+
+In order to define the type of data returned, you must specify one or more additional query string variables or arguments. The form is `name_of_field=type`, where `name_of_field` will be the name used in the result and `type` is the type of data to mock the value with.
+
+```js
+http://localhost:3000/?$num=3&author=name
+
+# object
+var data = getInstance( "MockData@MockDataCFC" )
+    .mock(
+        $num = 3,
+        "author" = "name"
+    );
+```
+
+This tells the service to return 3 objects with each containing an `author` field that has a type value of `name`. (More on types in a minute.) The result then would look something like this:
+
+```json
+[
+    {
+        author: "Frank Smith"
+    },
+    {
+        author: "Gary Stroz"
+    },
+    {
+        author: "Lynn Padgett"
+    }
+]
+```
+
+Additional fields for the object model can just be appended to the URL or method call:
+
+```json
+http://localhost:3000/?$num=3&author=name&gender=oneof:male:female
+
+# object
+var data = getInstance( "MockData@MockDataCFC" )
+    .mock(
+        $num = 3,
+        "author" = "name",
+        "gender" = "oneOf:male:female"
+    );
+```
+
+Which gives...
+
+```json
+[
+    {
+        author : "Lisa Padgett",
+        gender : "male"
+    },
+    {
+        author : "Roger Clapton",
+        gender : "male"
+    },
+    {
+        author : "Heather Degeneres",
+        gender : "male"
+    }
+]
+```
+
+### Nested Data
+
+Since version `v3.0.0`, MockDataCFC supports the nesting of the field models to represent rich and complex JSON return structures.  We currently support the following nested types:
+
+* array of objects - `name = [ { ... } ]`
+* array of values - `name = [ { $type = "" } ]`
+* object - `name = { ... }`
+
+Let's imagine the following object graph:
+
+```
+Author
+    Has Many Books
+        Has Many Categories
+    Has Keywords
+    Has A Publisher
+```
+
+I can then use this mocking DSL to define it:
+
+```js
+getInstance( "MockData@MockDataCFC" )
+    .mock(
+
+        fullName    = "name",
+        description = "sentence",
+        age         = "age",
+        id          = "uuid",
+        createdDate = "datetime",
+        isActive	= "oneof:true:false",
+
+        // one to many complex object definitions
+        books = [
+            {
+                $num = "rand:1:3",
+                "id" = "uuid",
+                "title" = "words:1:5",
+                "categories" = {
+                    "$num"      = "2",
+                    "id"        = "uuid",
+                    "category"  = "words"
+                }
+            }
+        ],
+
+        // object definition
+        publisher = {
+            "id" 	= "uuid",
+            "name" 	= "sentence"
+        },
+
+        // array of values
+        keywords = [
+            {
+                "$num" 	= "rand:1:10",
+                "$type" = "words"
+            }
+        ]
+    );
+```
+
+#### Nested Array of Values
+
+To create nested array of values you will define the name of the property and then an array with a struct defining how many and of which type using the special keys: `$num, $type`
+
+```js
+// array of values
+keywords = [
+    {
+        "$num" 	= "rand:1:10",
+        "$type" = "words"
+    }
+]
+```
+
+#### Nested Array of Objects
+
+To create nested array of objects you will define the name of the property and then an array with a struct defining how many and the definition of the object (Not there will be no `type` key):
+
+```js
+// array of objects
+books = [
+    {
+        $num = "rand:1:3",
+        "id" = "uuid",
+        "title" = "words:1:5",
+        "categories" = {
+            "$num"      = "2",
+            "id"        = "uuid",
+            "category"  = "words"
+        }
+    }
+]
+```
+
+### Nested Object
+
+To create a nested object you will define the name of the property and then a struct defining it:
+
+```js
+// object definition
+publisher = {
+    "id" 	= "uuid",
+    "name" 	= "sentence"
+}
+```

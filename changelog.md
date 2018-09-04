@@ -1,7 +1,29 @@
 # Changelog
 
-## 2.5.0
+## 3.0.0
 
+* **Compatibility** : `num` arguments have been dropped and you must use `$num` as the identifier for how many items you like
+* Introduction of nested mocking. You can now declare nested mocks as structs and the mock data will nest accordingly:
+
+```js
+getInstance( "MockData@MockDataCFC" )
+	.mock(
+		books=[{
+			num=2,
+			"id"="uuid",
+			"title"="words:1:5"
+		}],
+		fullName="name",
+		description="sentence",
+		age="age",
+		id="uuid",
+		createdDate="datetime"
+	);
+```
+
+This will produce top level mock data with 2 books per record.
+
+* Nested Data for array of objects, array of values and simple objects
 * ACF Compatibilities
 * Updated readmes and syntax updates for modern engines
 * Upgraded to new ColdBox module Harness
