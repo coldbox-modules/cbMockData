@@ -47,6 +47,7 @@ component {
 		"words" 
 	];
 
+
 	variables.RESERVED_ARGUMENTS = [ "$num", "$returnType", "$type" ];
 
 	/**
@@ -54,9 +55,12 @@ component {
 	 * The incoming arguments are evaluated for mocking data services.
 	 */
 	remote function mock() returnformat="json" {
-
 		//cfheader( name="Content-Type", value="text/html" );
-		
+
+		var _meta = {
+			seqOfCnt = 0
+		};
+
 		// Did they specify how many they want?
 		if( !arguments.keyExists( "$num" ) ){
 			arguments.$num = 10;
@@ -93,7 +97,7 @@ component {
 		if( arguments.keyExists( "$type" ) ){
 			var result = [];
 			for( var i=1; i <= arguments.$num; i++ ){
-				result.append( generateFakeData( arguments[ "$type" ], i ) );
+				result.append( generateFakeData( arguments[ "$type" ], i, _meta ) );
 			}
 		} 
 		// Then we go on return types for return formats
@@ -101,15 +105,15 @@ component {
 			// Array of struct objects
 			var result = [];
 			for( var i=1; i <= arguments.$num; i++ ){
-				result.append( generateNewItem( aFieldModels, i ) );
+				result.append( generateNewItem( aFieldModels, i, _meta ) );
 			}
 		} else {
 			// Struct objects
-			var result = generateNewItem( aFieldModels, 0 );
+			var result = generateNewItem( aFieldModels, 0, _meta );
 		}
 		
 		// If in Service mode, then add headers
-		if( cgi.script_name contains "MockData.cfc" ){
+		if( findNoCase( "MockData.cfc", GetBaseTemplatePath() ) ){
 			cfheader( name="Content-Type", value="application/json" );
 			// CORS for web service calls
 			cfheader( name="Access-Control-Allow-Origin", value="*" );
@@ -133,7 +137,7 @@ component {
 	 * @type The valid incoming fake data type
 	 * @index The index location of the fake iteration
 	 */
-	private function generateFakeData( required type, required index ){
+	private function generateFakeData( required type, required index, _meta ){
 		if( type == "autoincrement" ){
 			return arguments.index;
 		}
@@ -179,6 +183,9 @@ component {
 		if( type.find( "oneof" ) == 1 ){
 			return generateOneOf( type );
 		}
+		if( type.find( "seqof" ) == 1 ){
+			return generateSeqOf( type, arguments._meta );
+		}
 		if( type.find( "lorem" ) == 1 ){
 			return generateLorem( type );
 		}
@@ -200,7 +207,7 @@ component {
 	 * @fieldModels A struct of name and type of the model to generate
 	 * @index The numerical index of the item being generated
 	 */
-	private struct function generateNewItem( required array fieldModels, required index ) {
+	private struct function generateNewItem( required array fieldModels, required index, _meta = {} ) {
 		var result = {};
 		arguments.fieldModels.each( function( field ){
 			
@@ -231,7 +238,7 @@ component {
 				result[ field.name ] = mock( argumentCollection=field.type[ 1 ] );
 			} else {
 				// Generate the fake data
-				result[ field.name ] = generateFakeData( field.type, index );
+				result[ field.name ] = generateFakeData( field.type, index, _meta );
 			}
 		} );
 
@@ -313,7 +320,7 @@ component {
 			return result;
 		}
 	}
-
+	
 	/**
 	 * generate one of functions
 	 */
@@ -324,6 +331,21 @@ component {
 		return items[ randRange( 1, items.len() ) ];
 	}
 
+	/**
+	 * generate sequence of functions
+	 */
+	private function generateSeqOf( required type, required _meta ){
+		// Support oneof:male:female, ie, pick a random one
+		try {
+			var items = arguments.type.listToArray( ":" );
+			items.deleteAt( 1 );
+			_meta.seqOfCnt = _meta.seqOfCnt < items.len() ? ++_meta.seqOfCnt : 1;
+			return items[_meta.seqOfCnt];
+		} catch (e) {
+			writeDump(e);
+		}
+	}
+	
 	/**
 	 * Generate a random number
 	 */
