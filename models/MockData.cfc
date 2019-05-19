@@ -109,7 +109,7 @@ component {
 		}
 		
 		// If in Service mode, then add headers
-		if( findNoCase( "MockData.cfc", GetBaseTemplatePath() ) ){
+		if( cgi.script_name contains "MockData.cfc" ){
 			cfheader( name="Content-Type", value="application/json" );
 			// CORS for web service calls
 			cfheader( name="Access-Control-Allow-Origin", value="*" );
