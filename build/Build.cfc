@@ -34,7 +34,10 @@ component{
             }
             // Create directories
             directoryCreate( item, true, true );
-        } );
+		} );
+
+		// Create Mappings
+		fileSystemUtil.createMapping( "coldbox", variables.cwd & "test-harness/coldbox" );
 
         return this;
     }
@@ -83,7 +86,8 @@ component{
         command( 'testbox run' )
             .params(
                 runner = variables.testRunner,
-                verbose = true
+				verbose = true,
+				outputFile = "build/results.json"
             )
             .run();
 

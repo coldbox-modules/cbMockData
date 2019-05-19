@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.1.0
+
+* CommandBox ability to execute
+* Template updates to standards
+
 ## 3.0.0
 
 * **Compatibility** : `num` arguments have been dropped and you must use `$num` as the identifier for how many items you like
