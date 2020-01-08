@@ -30,7 +30,7 @@ component {
 		"George",
 		"Heather",
 		"Jacob",
-		"Jorge"
+		"Jorge",
 		"Jose",
 		"Juan",
 		"Leah",
@@ -50,7 +50,7 @@ component {
 		"Romeo",
 		"Scott",
 		"Todd",
-		"Veronica",
+		"Veronica"
 	];
 
 	variables.lNames = [
@@ -68,7 +68,7 @@ component {
 		"Lopez",
 		"Madeiro",
 		"Maggiano",
-		"Marquez"
+		"Marquez",
 		"Messi",
 		"Moneymaker",
 		"Padgett",
@@ -83,21 +83,21 @@ component {
 		"Smith",
 		"Stroz",
 		"Tobias",
-		"Zelda",
+		"Zelda"
 	];
 
 	variables.emailDomains = [
 		"adobe.com",
 		"aol.com",
 		"apple.com",
-		"box.com"
+		"box.com",
 		"email.com",
 		"gmail.com",
 		"google.com",
 		"microsoft.com",
 		"msn.com",
 		"ortus.com",
-		"test.com",
+		"test.com"
 	];
 
 	variables.lorem = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
@@ -221,65 +221,70 @@ component {
 	 * @index The index location of the fake iteration
 	 */
 	private function generateFakeData( required type, required index ){
-		if ( type == "autoincrement" ) {
-			return arguments.index;
-		}
-		if ( type == "string" ) {
-			return "string";
-		}
-		if ( type == "uuid" ) {
-			return createUUID();
-		}
-		if ( type == "name" ) {
-			return generateFirstName() & " " & generateLastName();
-		}
-		if ( type == "fname" ) {
-			return generateFirstName();
-		}
-		if ( type == "lname" ) {
-			return generateLastName();
-		}
-		if ( type == "age" ) {
-			return randRange( 18, 75 );
-		}
-		if ( type == "all_age" ) {
-			return randRange( 1, 100 );
-		}
-		if ( type == "email" ) {
-			return generateEmail();
-		}
-		if ( type == "ssn" ) {
-			return generateSSN();
-		}
-		if ( type == "tel" ) {
-			return generateTelephone();
-		}
-		if ( type == "date" ) {
-			return generateDateRange();
-		}
-		if ( type == "datetime" ) {
-			return generateDateRange( showTime = true );
-		}
-		if ( type.find( "num" ) == 1 ) {
-			return generateNumber( type );
-		}
-		if ( type.find( "oneof" ) == 1 ) {
-			return generateOneOf( type );
-		}
-		if ( type.find( "lorem" ) == 1 ) {
-			return generateLorem( type );
-		}
-		if ( type.find( "baconlorem" ) == 1 ) {
-			return generateLorem( type );
-		}
-		if ( type.find( "sentence" ) == 1 ) {
-			return generateSentences( type );
-		}
-		if ( type.find( "words" ) == 1 ) {
-			return generateWords( type );
+		// Supplier closure or lambda
+		if( isClosure( arguments.type ) || isCustomFunction( arguments.type ) ){
+			return arguments.type( arguments.index );
 		}
 
-		return "No Type ['#type#'] Found";
+		if ( arguments.type == "autoincrement" ) {
+			return arguments.index;
+		}
+		if ( arguments.type == "string" ) {
+			return "string";
+		}
+		if ( arguments.type == "uuid" ) {
+			return createUUID();
+		}
+		if ( arguments.type == "name" ) {
+			return generateFirstName() & " " & generateLastName();
+		}
+		if ( arguments.type == "fname" ) {
+			return generateFirstName();
+		}
+		if ( arguments.type == "lname" ) {
+			return generateLastName();
+		}
+		if ( arguments.type == "age" ) {
+			return randRange( 18, 75 );
+		}
+		if ( arguments.type == "all_age" ) {
+			return randRange( 1, 100 );
+		}
+		if ( arguments.type == "email" ) {
+			return generateEmail();
+		}
+		if ( arguments.type == "ssn" ) {
+			return generateSSN();
+		}
+		if ( arguments.type == "tel" ) {
+			return generateTelephone();
+		}
+		if ( arguments.type == "date" ) {
+			return generateDateRange();
+		}
+		if ( arguments.type == "datetime" ) {
+			return generateDateRange( showTime = true );
+		}
+		if ( arguments.type.find( "num" ) == 1 ) {
+			return generateNumber( arguments.type );
+		}
+		if ( arguments.type.find( "oneof" ) == 1 ) {
+			return generateOneOf( arguments.type );
+		}
+		if ( arguments.type.find( "lorem" ) == 1 ) {
+			return generateLorem( arguments.type );
+		}
+		if ( arguments.type.find( "baconlorem" ) == 1 ) {
+			return generateLorem( arguments.type );
+		}
+		if ( arguments.type.find( "sentence" ) == 1 ) {
+			return generateSentences( arguments.type );
+		}
+		if ( arguments.type.find( "words" ) == 1 ) {
+			return generateWords( arguments.type );
+		}
+
+		return "No Type ['#arguments.type#'] Found";
 	}
 
 	/**
@@ -290,7 +295,7 @@ component {
 	private struct function generateNewItem( required array fieldModels, required index ){
 		var result = {};
 		arguments.fieldModels.each( function( field ){
-			// Verify the field struct has a name, else generaate it
+			// Verify the field struct has a name, else generate it
 			if ( !field.keyExists( "name" ) ) {
 				field.name = "field" & i;
 			}
