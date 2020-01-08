@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.2.0
+
+* Formatting of source via cfformat
+* Fixes for api doc creations
+* Functional update of json service to filter out reserved rc keys
+
 ## 3.1.0
 
 * CommandBox ability to execute
