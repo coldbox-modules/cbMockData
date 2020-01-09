@@ -10,8 +10,8 @@ MockDataCFC allows you to define the return JSON model in a very deterministic a
 
 ## Requirements
 
-* ColdFusion 11+
-* Lucee 4.5+
+* ColdFusion 2016+
+* Lucee 5+
 
 ## Installation
 
@@ -112,6 +112,20 @@ The available types MockDataCFC supports are:
 * `tel`: Generates a random (American) telephone number.
 * `uuid`: Generates a random UUID
 * `words`: Generates a single word. If used as `word:N`, returns N words.  If used as `words:X:Y`, returns a random number of words beetween X and Y.
+
+### Supplier Type
+
+You can also create your own content by using a supplier closure/lambda as your type.  This is a function that will create the content and return it for you.
+
+> Please note that this only works when using the direct function call approach, not the service
+
+```js
+"name" : function( index ){
+	return "luis";
+}
+```
+
+The function receives the currently iterating `index` as an argument as well.  All you need to do is return back content.
 
 ### Mocking DSL
 
