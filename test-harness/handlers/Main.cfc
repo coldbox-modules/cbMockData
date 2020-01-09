@@ -3,7 +3,9 @@
 	function index( event, rc, prc ){
 		return getInstance( "MockData@MockDataCFC" )
 			.mock(
-
+				testSupplier = function( index ){
+					return "hello#arguments.index#";
+				},
 				fullName    = "name",
 				description = "sentence",
 				age         = "age",

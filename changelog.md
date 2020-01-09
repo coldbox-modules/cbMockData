@@ -1,5 +1,19 @@
 # Changelog
 
+## 3.2.0
+
+### New Features
+
+* Added the ability for a type to be a closure/lambda to act as a supplier. This way, this function will be called every time for you to supply the result.  It receives the current iterating `index` as well: `function( index ){}`
+ 
+### Improvements
+
+* Formatting of source via cfformat
+* Fixes for api doc creations to use the project mapping
+* Functional update of json service to filter out reserved rc keys
+* TestBox 3 upgrade
+* More direct scoping of the arguments scope
+
 ## 3.1.0
 
 * CommandBox ability to execute

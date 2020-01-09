@@ -1,6 +1,6 @@
 {
     "name":"MockDataCFC",
-    "version":"3.1.0",
+    "version":"3.2.0",
     "location":"https://downloads.ortussolutions.com/ortussolutions/coldbox-modules/MockDataCFC/@build.version@/MockDataCFC-@build.version@.zip",
     "author":"Ortus Solutions",
     "homepage":"https://github.com/Ortus-Solutions/MockDataCFC",
@@ -17,15 +17,13 @@
         "Mock Data"
     ],
     "contributors":[
-		"Ray Camden",
+        "Ray Camden",
         "Luis Majano <lmajano@ortussolutions.com>"
     ],
     "dependencies":{},
-    "devDependencies":{
-    },
-    "installPaths":{
-	},
-	"ignore":[
+    "devDependencies":{},
+    "installPaths":{},
+    "ignore":[
         "**/.*",
         "test-harness",
         "*/.md"
