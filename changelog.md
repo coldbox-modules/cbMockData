@@ -1,11 +1,30 @@
 # Changelog
 
+## 3.3.0
+
+### New Features
+
+* New type: `website` to generate random protocol based websites
+* New type: `website_http` to generate `http` only based websites
+* New type: `website_https` to generate `https` only based websites
+* New type: `imageurl` : Generates a random image URL with a random protocol
+* New type: `imageurl_http` : Generates a random image URL with `http` only protocol
+* New type: `imageurl_https` : Generates a random image URL with `https` only protocol
+* New type: `url` : Generates a random URL with a random protocol
+* New type: `url_http` : Generates a random URL with `http` only protocol
+* New type: `url_https` : Generates a random URL with `https` only protocol
+  
+### Improvements
+
+* Added new domains for more random generation
+* Removed spacing from words
+
 ## 3.2.0
 
 ### New Features
 
 * Added the ability for a type to be a closure/lambda to act as a supplier. This way, this function will be called every time for you to supply the result.  It receives the current iterating `index` as well: `function( index ){}`
- 
+
 ### Improvements
 
 * Formatting of source via cfformat

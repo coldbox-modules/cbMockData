@@ -6,12 +6,17 @@
 				testSupplier = function( index ){
 					return "hello#arguments.index#";
 				},
+
 				fullName    = "name",
 				description = "sentence",
 				age         = "age",
 				id          = "uuid",
 				createdDate = "datetime",
 				isActive	= "oneof:true:false",
+				number 		= "num:50:100",
+				homepage 	= "website",
+				longUrl  	= "url",
+				pictureUrl  = "imageUrl",
 
 				// one to many complex object definitions
 				books = [

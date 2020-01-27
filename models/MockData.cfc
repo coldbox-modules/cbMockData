@@ -86,17 +86,32 @@ component {
 		"Zelda"
 	];
 
-	variables.emailDomains = [
+	variables.webDomains = [
 		"adobe.com",
 		"aol.com",
 		"apple.com",
+		"awesome.com",
 		"box.com",
+		"box.io",
+		"box.net",
+		"boxing.com",
+		"example.sv.com",
+		"example.co.uk",
+		"example.jp",
+		"example.edu",
+		"example.com",
+		"example.net",
 		"email.com",
+		"mail.io",
 		"gmail.com",
 		"google.com",
 		"microsoft.com",
 		"msn.com",
+		"ortus.io",
 		"ortus.com",
+		"sample.io",
+		"sample.edu",
+		"sample.com",
 		"test.com"
 	];
 
@@ -111,7 +126,7 @@ component {
 	];
 
 	variables.words = listToArray(
-		"Aeroplane,Air,Aircraft Carrier,Airforce,Airport,Album,Alphabet,Apple,Arm,Army,Baby,Baby,Backpack,Balloon,Banana,Bank,Barbecue,Bathroom,Bathtub,Bed,Bed,Bee,Bible,Bible,Bird,Bomb,Book,Boss,Bottle,Bowl,Box,Boy,Brain,Bridge,Butterfly,Button,Cappuccino,Car,Car-race,Carpet,Carrot,Cave,Chair,Chess Board,Chief,Child,Chisel,Chocolates,Church,Church,Circle,Circus,Circus,Clock,Clown,Coffee,Coffee-shop,Comet,Compact Disc,Compass,Computer,Crystal,Cup,Cycle,Data Base,Desk,Diamond,Dress,Drill,Drink,Drum,Dung,Ears,Earth,Egg,Electricity,Elephant,Eraser,Explosive,Eyes,Family,Fan,Feather,Festival,Film,Finger,Fire,Floodlight,Flower,Foot,Fork,Freeway,Fruit,Fungus,Game,Garden,Gas,Gate,Gemstone,Girl,Gloves,God,Grapes,Guitar,Hammer,Hat,Hieroglyph,Highway,Horoscope,Horse,Hose,Ice,Ice-cream,Insect,Jet fighter,Junk,Kaleidoscope,Kitchen,Knife,Leather jacket,Leg,Library,Liquid,Magnet,Man,Map,Maze,Meat,Meteor,Microscope,Milk,Milkshake,Mist,Money,Monster,Mosquito,Mouth,Nail,Navy,Necklace,Needle,Onion,PaintBrush,Pants,Parachute,Passport,Pebble,Pendulum,Pepper,Perfume,Pillow,Plane,Planet,Pocket,Post-office,Potato,Printer,Prison,Pyramid,Radar,Rainbow,Record,Restaurant,Rifle,Ring,Robot,Rock,Rocket,Roof,Room,Rope,Saddle,Salt,Sandpaper,Sandwich,Satellite,School,Ship,Shoes,Shop,Shower,Signature,Skeleton,Slave,Snail,Software,Solid,Space Shuttle,Spectrum,Sphere,Spice,Spiral,Spoon,Sports-car,Spot Light,Square,Staircase,Star,Stomach,Sun,Sunglasses,Surveyor,Swimming Pool,Sword,Table,Tapestry,Teeth,Telescope,Television,Tennis racquet,Thermometer,Tiger,Toilet,Tongue,Torch,Torpedo,Train,Treadmill,Triangle,Tunnel,Typewriter,Umbrella,Vacuum,Vampire,Videotape,Vulture,Water,Weapon,Web,Wheelchair,Window,Woman,Worm,X-ray"
+		"Aeroplane,Air,Aircraft,Airforce,Airport,Album,Alphabet,Apple,Arm,Army,Baby,Baby,Backpack,Balloon,Banana,Bank,Barbecue,Bathroom,Bathtub,Bed,Bed,Bee,Bible,Bible,Bird,Bomb,Book,Boss,Bottle,Bowl,Box,Boy,Brain,Bridge,Butterfly,Button,Cappuccino,Car,Car-race,Carpet,Carrot,Cave,Chair,Chess,Chief,Child,Chisel,Chocolates,Church,Church,Circle,Circus,Circus,Clock,Clown,Coffee,Coffee-shop,Comet,CompactDisc,Compass,Computer,Crystal,Cup,Cycle,DataBase,Desk,Diamond,Dress,Drill,Drink,Drum,Dung,Ears,Earth,Egg,Electricity,Elephant,Eraser,Explosive,Eyes,Family,Fan,Feather,Festival,Film,Finger,Fire,Floodlight,Flower,Foot,Fork,Freeway,Fruit,Fungus,Game,Garden,Gas,Gate,Gemstone,Girl,Gloves,God,Grapes,Guitar,Hammer,Hat,Hieroglyph,Highway,Horoscope,Horse,Hose,Ice,Ice-cream,Insect,Jetfighter,Junk,Kaleidoscope,Kitchen,Knife,Leather,Leg,Library,Liquid,Magnet,Man,Map,Maze,Meat,Meteor,Microscope,Milk,Milkshake,Mist,Money,Monster,Mosquito,Mouth,Nail,Navy,Necklace,Needle,Onion,PaintBrush,Pants,Parachute,Passport,Pebble,Pendulum,Pepper,Perfume,Pillow,Plane,Planet,Pocket,Post-office,Potato,Printer,Prison,Pyramid,Radar,Rainbow,Record,Restaurant,Rifle,Ring,Robot,Rock,Rocket,Roof,Room,Rope,Saddle,Salt,Sandpaper,Sandwich,Satellite,School,Ship,Shoes,Shop,Shower,Signature,Skeleton,Slave,Snail,Software,Solid,SpaceShuttle,Spectrum,Sphere,Spice,Spiral,Spoon,Sports-car,Spotlight,Square,Staircase,Star,Stomach,Sun,Sunglasses,Surveyor,Swimming,Sword,Table,Tapestry,Teeth,Telescope,Television,Tennis,Thermometer,Tiger,Toilet,Tongue,Torch,Torpedo,Train,Treadmill,Triangle,Tunnel,Typewriter,Umbrella,Vacuum,Vampire,Videotape,Vulture,Water,Weapon,Web,Wheelchair,Window,Woman,Worm,X-ray"
 	);
 
 	variables.baconlorem = arrayToList( variables.sentences );
@@ -133,6 +148,33 @@ component {
 		"tel",
 		"uuid",
 		"words"
+	];
+
+	variables.extensions = [
+		".cfm",
+		".css",
+		".doc",
+		".docx",
+		".jpg",
+		".js",
+		".htm",
+		".html",
+		".pdf",
+		".php",
+		".png",
+		".ppt",
+		".pptx",
+		".xls",
+		".xlsx"
+	];
+
+	variables.imageExtensions = [
+		".svg",
+		".gif",
+		".jpg",
+		".jpeg",
+		".pdf",
+		".png"
 	];
 
 	variables.RESERVED_ARGUMENTS = [ "$num", "$returnType", "$type" ];
@@ -217,6 +259,7 @@ component {
 
 	/**
 	 * Generate the fake data according to incoming type
+	 *
 	 * @type The valid incoming fake data type
 	 * @index The index location of the fake iteration
 	 */
@@ -252,6 +295,33 @@ component {
 		}
 		if ( arguments.type == "email" ) {
 			return generateEmail();
+		}
+		if ( arguments.type == "imageurl" ) {
+			return generateImageUrl();
+		}
+		if ( arguments.type == "imageurl_http" ) {
+			return generateImageUrl( httpOnly = true );
+		}
+		if ( arguments.type == "imageurl_https" ) {
+			return generateImageUrl( httpsOnly = true );
+		}
+		if ( arguments.type == "url" ) {
+			return generateUrl();
+		}
+		if ( arguments.type == "url_http" ) {
+			return generateUrl( httpOnly = true );
+		}
+		if ( arguments.type == "url_https" ) {
+			return generateUrl( httpsOnly = true );
+		}
+		if ( arguments.type == "website" ) {
+			return generateWebsite();
+		}
+		if ( arguments.type == "website_http" ) {
+			return generateWebsite( httpOnly = true );
+		}
+		if ( arguments.type == "website_https" ) {
+			return generateWebsite( httpsOnly = true );
 		}
 		if ( arguments.type == "ssn" ) {
 			return generateSSN();
@@ -331,6 +401,11 @@ component {
 
 	/********************************* GENERATORS ********************************/
 
+	/**
+	 * Generate random words
+	 *
+	 * @type This can be words, or words:count
+	 */
 	private function generateWords( required type ){
 		if ( type == "words" ) {
 			return words[ randRange( 1, arrayLen( words ) ) ];
@@ -457,7 +532,73 @@ component {
 		var fname       = generateFirstName().toLowerCase();
 		var lname       = generateLastName().toLowerCase();
 		var emailPrefix = fname.charAt( 1 ) & lname;
-		return emailPrefix & "@" & emailDomains[ randRange( 1, emailDomains.len() ) ];
+		return emailPrefix & "@" & variables.webDomains[ randRange( 1, variables.webDomains.len() ) ];
+	}
+
+	/**
+	 * Generate a random image URL including a random protocol
+	 *
+	 * @httpOnly Only do http sites, mutex with httpsOnly
+	 * @httpsOnly Only do https sites, mutex with httpOnly
+	 */
+	private function generateImageUrl( boolean httpOnly, boolean httpsOnly ){
+		arguments.imageExtensions = true;
+		return generateUrl( argumentCollection=arguments );
+	}
+
+	/**
+	 * Generate a random URL including a random protocol
+	 *
+	 * @httpOnly Only do http sites, mutex with httpsOnly
+	 * @httpsOnly Only do https sites, mutex with httpOnly
+	 */
+	private function generateUrl( boolean httpOnly, boolean httpsOnly, boolean imageExtensions=false ){
+		var randomPaths = generateWords( "words:1:#randRange( 1, 5 )#" )
+			.listToArray( " " )
+			.toList( "/" )
+			.lcase();
+
+		var randomHash = "";
+		if( ( randRange( 1, 10 ) % 2 ) ){
+			randomHash = "###generateWords( "words" )#";
+		}
+
+		var randomFile = "";
+		if( ( randRange( 1, 10 ) % 2 ) ){
+			randomFile = generateWords( "words" );
+		}
+
+		if( arguments.imageExtensions ){
+			randomFile &= variables.imageExtensions[ randRange( 1, variables.imageExtensions.len() ) ];
+		} else {
+			randomFile &= variables.extensions[ randRange( 1, variables.extensions.len() ) ];
+		}
+
+		return generateWebsite( argumentCollection=arguments ) & "/" & randomPaths & randomFile & randomHash;
+	}
+
+	/**
+	 * Generate a random website including random protocol
+	 *
+	 * @httpOnly Only do http sites, mutex with httpsOnly
+	 * @httpsOnly Only do https sites, mutex with httpOnly
+	 */
+	private function generateWebsite( boolean httpOnly, boolean httpsOnly ){
+
+		var prefix = "http";
+		if( !isNull( arguments.httpsOnly ) ){
+			prefix = "https";
+		}
+		if( isNull( arguments.httpOnly ) && isNull( arguments.httpsOnly ) ){
+			prefix &= ( ( randRange(1, 10) % 2 ) ? "s" : "" );
+		}
+
+		var webPart = "";
+		if( ( randRange( 1, 10 ) % 2 ) ){
+			webPart = "www.";
+		}
+
+		return "#prefix#://" & webpart & variables.webDomains[ randRange( 1, variables.webDomains.len() ) ];
 	}
 
 	/**
