@@ -171,6 +171,17 @@ component extends="coldbox.system.testing.BaseTestCase" appMapping="root"{
 				expect(	r[ 1 ].test ).toHaveLength( 200 );
 			});
 
+			it( "can generate an ip address", function(){
+				var r = mockDataCFC.mock( test = "ipaddress" );
+				debug( r );
+				expect(
+					reFindNoCase(
+						"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$",
+						r[ 1 ].test
+					 )
+				).toBeTrue();
+			});
+
 		});
 
 	}

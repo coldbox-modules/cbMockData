@@ -268,9 +268,11 @@ component {
 		if( isClosure( arguments.type ) || isCustomFunction( arguments.type ) ){
 			return arguments.type( arguments.index );
 		}
-
 		if ( arguments.type == "autoincrement" ) {
 			return arguments.index;
+		}
+		if ( arguments.type == "ipaddress" ) {
+			return generateIpAddress();
 		}
 		if ( arguments.type.find( "string" ) == 1 ) {
 			return generateString( arguments.type );
@@ -650,6 +652,13 @@ component {
 		}
 
 		return "#prefix#://" & webpart & variables.webDomains[ randRange( 1, variables.webDomains.len() ) ];
+	}
+
+	/**
+	 * Generate an ip address
+	 */
+	private function generateIpAddress(){
+		return "#randRange( 0, 255 )#.#randRange( 0, 255 )#.#randRange( 0, 255 )#.#randRange( 0, 255 )#";
 	}
 
 	/**

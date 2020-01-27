@@ -4,6 +4,7 @@
 
 ### New Features
 
+* `ipaddress` : Generates an ipv4 address
 * New type: `string` which generates random hash strings of certain length. Default is 10 characters.
 * New type: `website` to generate random protocol based websites
 * New type: `website_http` to generate `http` only based websites

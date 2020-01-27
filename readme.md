@@ -103,6 +103,7 @@ The available types MockDataCFC supports are:
 * `imageurl` : Generates a random image URL with a random protocol
 * `imageurl_http` : Generates a random image URL with `http` only protocol
 * `imageurl_https` : Generates a random image URL with `https` only protocol
+* `ipaddress` : Generates an ipv4 address
 * `name`: Generates a random name.
 * `lname`: Generates a random last name.
 * `lorem`: Returns lorem ipsum text. If used as `lorem:N`, returns N paragraphs. If used as `lorem:X:Y`, returns a random number of paragraphs between X and Y.

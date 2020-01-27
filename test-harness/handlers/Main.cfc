@@ -18,6 +18,7 @@
 				homepage 	= "website",
 				longUrl  	= "url",
 				pictureUrl  = "imageUrl",
+				logIp 		= "ipaddress",
 
 				// one to many complex object definitions
 				books = [
