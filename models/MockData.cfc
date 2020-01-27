@@ -253,7 +253,7 @@ component {
 	 * Check if an incoming type exists in our default types
 	 * @target The target to check
 	 */
-	boolean function isDefault( required target ){
+	private boolean function isDefault( required target ){
 		return defaults.findNoCase( target ) > 0;
 	}
 
@@ -272,8 +272,8 @@ component {
 		if ( arguments.type == "autoincrement" ) {
 			return arguments.index;
 		}
-		if ( arguments.type == "string" ) {
-			return "string";
+		if ( arguments.type.find( "string" ) == 1 ) {
+			return generateString( arguments.type );
 		}
 		if ( arguments.type == "uuid" ) {
 			return createUUID();
@@ -399,7 +399,58 @@ component {
 		return result;
 	}
 
+	/**
+	 * Get the parts count from the incoming target type which can be
+	 * - type:max
+	 * - type:min:max
+	 */
+	private function getPartCounts( required target ){
+		// Calculate counts
+		var parts  = target.listToArray( ":" );
+
+		if ( parts.len() == 2 ) {
+			return parts[ 2 ];
+		} else {
+			return randRange( parts[ 2 ], parts[ 3 ] );
+		}
+	}
+
 	/********************************* GENERATORS ********************************/
+
+	/**
+	 * Generate a SHA-512 hash with no - dashes
+	 */
+	private function generateHash(){
+		return replace( hash( now(), "SHA-512" ), "-", "", "all" );
+	}
+
+	/**
+	 * Generate random strings
+	 *
+	 * @type This can be strings, or strings:lettersMax
+	 */
+	private function generateString( required type ){
+		// Default is 10 characters
+		if( type == "string" ){
+			return left( generateHash(), 10 );
+		}
+
+		// Else choose length via : parts
+		if ( type.find( ":" ) > 1 ) {
+			// Calculate counts
+			var result = "";
+			var count  = getToken( type, 2, ":" );
+			// Calculate Blocks
+			var blocks = ceiling( count / 128 );
+
+			// Generate strings
+			for ( var i = 0; i < blocks; i++ ) {
+				result &= generateHash();
+			}
+
+			return left( result, count );
+		}
+	}
 
 	/**
 	 * Generate random words

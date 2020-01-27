@@ -7,6 +7,7 @@
 					return "hello#arguments.index#";
 				},
 
+				key 		= "string:50",
 				fullName    = "name",
 				description = "sentence",
 				age         = "age",

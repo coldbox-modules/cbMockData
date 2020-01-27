@@ -159,6 +159,18 @@ component extends="coldbox.system.testing.BaseTestCase" appMapping="root"{
 				expect(	r[ 1 ].homepage ).toBeUrl();
 			});
 
+			it( "can generate a string", function(){
+				var r = mockDataCFC.mock( test = "string" );
+				debug( r );
+				expect(	r[ 1 ].test ).toHaveLength( 10 );
+			});
+
+			it( "can generate a big string", function(){
+				var r = mockDataCFC.mock( test = "string:200" );
+				debug( r );
+				expect(	r[ 1 ].test ).toHaveLength( 200 );
+			});
+
 		});
 
 	}
