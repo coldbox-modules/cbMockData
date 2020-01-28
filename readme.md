@@ -10,8 +10,8 @@ MockDataCFC allows you to define the return JSON model in a very deterministic a
 
 ## Requirements
 
-* ColdFusion 11+
-* Lucee 4.5+
+* ColdFusion 2016+
+* Lucee 5+
 
 ## Installation
 
@@ -100,18 +100,42 @@ The available types MockDataCFC supports are:
 * `datetime`: Generates a random date and time value
 * `email`: Generates a random email.
 * `fname`: Generates a random first name.
+* `imageurl` : Generates a random image URL with a random protocol
+* `imageurl_http` : Generates a random image URL with `http` only protocol
+* `imageurl_https` : Generates a random image URL with `https` only protocol
+* `ipaddress` : Generates an ipv4 address
 * `name`: Generates a random name.
 * `lname`: Generates a random last name.
 * `lorem`: Returns lorem ipsum text. If used as `lorem:N`, returns N paragraphs. If used as `lorem:X:Y`, returns a random number of paragraphs between X and Y.
-* `num`: By default, a number from 1 to 10. You can also use the form num:X for a random number between 1 and X. Or num:X:Y for a random number between X and Y.
+* `num`: By default, a number from 1 to 10. You can also use the form `num:X` for a random number between 1 and X. Or `num:X:Y` for a random number between X and Y.
 * `oneof:x:y`: Requires you to pass N values after it delimited by a colon. Example: `oneof:male:female`. Will return a random value from that list.
 * `rnd:N`, `rand:N`, `rnd:x:y`, `rand:x:y` : Generate random numbers with a specific range or range cap.
 * `sentence`: Generates a sentences. If used as `sentence:N`, returns N sentences.  If used as `sentence:X:Y`, returns a random number of sentences beetween X and Y.
 * `ssn`: Generates a random Social Security number.
-* `string`: Just returns the word `string`
+* `string`: Generates a random string of length 10 by default.  You can increase the length by passing it `string:length`.
 * `tel`: Generates a random (American) telephone number.
 * `uuid`: Generates a random UUID
+* `url` : Generates a random URL with a random protocol
+* `url_http` : Generates a random URL with `http` only protocol
+* `url_https` : Generates a random URL with `https` only protocol
+* `website` : Generates a random website with random protocol
+* `website_http` : Generates a random website, `http` only protocol
+* `website_https` : Generates a random website, `https` only protocol
 * `words`: Generates a single word. If used as `word:N`, returns N words.  If used as `words:X:Y`, returns a random number of words beetween X and Y.
+
+### Supplier Type (Custom Data)
+
+You can also create your own content by using a supplier closure/lambda as your type.  This is a function that will create the content and return it for you.
+
+> Please note that this only works when using the direct function call approach, not the service
+
+```js
+"name" : function( index ){
+	return "luis";
+}
+```
+
+The function receives the currently iterating `index` as an argument as well.  All you need to do is return back content.
 
 ### Mocking DSL
 

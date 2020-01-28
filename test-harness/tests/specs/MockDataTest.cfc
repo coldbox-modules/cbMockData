@@ -53,7 +53,7 @@ component extends="coldbox.system.testing.BaseTestCase" appMapping="root"{
 			});
 
 			it( "can generate all ages", function(){
-				var r = mockDataCFC.mock( age="age" );
+				var r = mockDataCFC.mock( age="all_age" );
 				expect(	r[ 1 ].age ).toBeGTE( 1 )
 					.toBeLTE( 100 );
 			});
@@ -88,6 +88,7 @@ component extends="coldbox.system.testing.BaseTestCase" appMapping="root"{
 				expect(	r[ 1 ].value ).toBeNumeric()
 					.toBeLTE( 10 );
 			});
+
 			it( "can generate numbers with randomness", function(){
 				var r = mockDataCFC.mock( value="num:5" );
 				expect(	r[ 1 ].value ).toBeNumeric()
@@ -123,6 +124,64 @@ component extends="coldbox.system.testing.BaseTestCase" appMapping="root"{
 				var r = mockDataCFC.mock( notes="words" );
 				expect(	r[ 1 ].notes ).notToBeEmpty();
 			});
+
+			it( "can generate custom data", function(){
+				var r = mockDataCFC.mock( test = function( index ){ return "hello"; } );
+				expect(	r[ 1 ].test ).toBe( "hello" );
+			});
+
+			it( "can generate a website", function(){
+				var r = mockDataCFC.mock( homepage = "website" );
+				expect(	r[ 1 ].homepage ).toBeUrl();
+			});
+			it( "can generate https only websites", function(){
+				var r = mockDataCFC.mock( homepage = "website_https" );
+				r.each( function( item ){
+					expect( item.homepage ).toInclude( "https" );
+				} );
+			});
+			it( "can generate http only websites", function(){
+				var r = mockDataCFC.mock( homepage = "website_http" );
+				r.each( function( item ){
+					expect( item.homepage ).toInclude( "http:" );
+				} );
+			});
+
+			it( "can generate a url", function(){
+				var r = mockDataCFC.mock( homepage = "url" );
+				debug( r );
+				expect(	r[ 1 ].homepage ).toBeUrl();
+			});
+
+			it( "can generate an image url", function(){
+				var r = mockDataCFC.mock( homepage = "imageurl" );
+				debug( r );
+				expect(	r[ 1 ].homepage ).toBeUrl();
+			});
+
+			it( "can generate a string", function(){
+				var r = mockDataCFC.mock( test = "string" );
+				debug( r );
+				expect(	r[ 1 ].test ).toHaveLength( 10 );
+			});
+
+			it( "can generate a big string", function(){
+				var r = mockDataCFC.mock( test = "string:200" );
+				debug( r );
+				expect(	r[ 1 ].test ).toHaveLength( 200 );
+			});
+
+			it( "can generate an ip address", function(){
+				var r = mockDataCFC.mock( test = "ipaddress" );
+				debug( r );
+				expect(
+					reFindNoCase(
+						"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$",
+						r[ 1 ].test
+					 )
+				).toBeTrue();
+			});
+
 		});
 
 	}
