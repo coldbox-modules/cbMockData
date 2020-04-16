@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.3.1
+
+* `bug` : param the default method when executing via URL instead of setting it.
+
 ## 3.3.0
 
 ### New Features
