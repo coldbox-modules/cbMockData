@@ -4,8 +4,8 @@
  */
 component {
 
-	// So you can skip passing it, if hitting it directly.
-	url.method = "mock";
+	// Param default URL method if running cfc directly
+	param name="url.method" default="mock";
 
 	// Defaults used for data, may move to a file later
 	variables.fNames = [
@@ -239,9 +239,9 @@ component {
 
 		// If in Service mode, then add headers
 		if ( cgi.script_name contains "MockData.cfc" ) {
-			cfheader(name="Content-Type", value="application/json");
+			cfheader( name="Content-Type", value="application/json" );
 			// CORS for web service calls
-			cfheader(name="Access-Control-Allow-Origin", value="*");
+			cfheader( name="Access-Control-Allow-Origin", value="*" );
 		}
 
 		return result;
@@ -265,7 +265,7 @@ component {
 	 */
 	private function generateFakeData( required type, required index ){
 		// Supplier closure or lambda
-		if( isClosure( arguments.type ) || isCustomFunction( arguments.type ) ){
+		if ( isClosure( arguments.type ) || isCustomFunction( arguments.type ) ) {
 			return arguments.type( arguments.index );
 		}
 		if ( arguments.type == "autoincrement" ) {
@@ -408,7 +408,7 @@ component {
 	 */
 	private function getPartCounts( required target ){
 		// Calculate counts
-		var parts  = target.listToArray( ":" );
+		var parts = target.listToArray( ":" );
 
 		if ( parts.len() == 2 ) {
 			return parts[ 2 ];
@@ -423,7 +423,12 @@ component {
 	 * Generate a SHA-512 hash with no - dashes
 	 */
 	private function generateHash(){
-		return replace( hash( now(), "SHA-512" ), "-", "", "all" );
+		return replace(
+			hash( now(), "SHA-512" ),
+			"-",
+			"",
+			"all"
+		);
 	}
 
 	/**
@@ -433,7 +438,7 @@ component {
 	 */
 	private function generateString( required type ){
 		// Default is 10 characters
-		if( type == "string" ){
+		if ( type == "string" ) {
 			return left( generateHash(), 10 );
 		}
 
@@ -596,7 +601,7 @@ component {
 	 */
 	private function generateImageUrl( boolean httpOnly, boolean httpsOnly ){
 		arguments.imageExtensions = true;
-		return generateUrl( argumentCollection=arguments );
+		return generateUrl( argumentCollection = arguments );
 	}
 
 	/**
@@ -605,29 +610,33 @@ component {
 	 * @httpOnly Only do http sites, mutex with httpsOnly
 	 * @httpsOnly Only do https sites, mutex with httpOnly
 	 */
-	private function generateUrl( boolean httpOnly, boolean httpsOnly, boolean imageExtensions=false ){
+	private function generateUrl(
+		boolean httpOnly,
+		boolean httpsOnly,
+		boolean imageExtensions = false
+	){
 		var randomPaths = generateWords( "words:1:#randRange( 1, 5 )#" )
 			.listToArray( " " )
 			.toList( "/" )
 			.lcase();
 
 		var randomHash = "";
-		if( ( randRange( 1, 10 ) % 2 ) ){
+		if ( ( randRange( 1, 10 ) % 2 ) ) {
 			randomHash = "###generateWords( "words" )#";
 		}
 
 		var randomFile = "";
-		if( ( randRange( 1, 10 ) % 2 ) ){
+		if ( ( randRange( 1, 10 ) % 2 ) ) {
 			randomFile = generateWords( "words" );
 		}
 
-		if( arguments.imageExtensions ){
+		if ( arguments.imageExtensions ) {
 			randomFile &= variables.imageExtensions[ randRange( 1, variables.imageExtensions.len() ) ];
 		} else {
 			randomFile &= variables.extensions[ randRange( 1, variables.extensions.len() ) ];
 		}
 
-		return generateWebsite( argumentCollection=arguments ) & "/" & randomPaths & randomFile & randomHash;
+		return generateWebsite( argumentCollection = arguments ) & "/" & randomPaths & randomFile & randomHash;
 	}
 
 	/**
@@ -637,17 +646,16 @@ component {
 	 * @httpsOnly Only do https sites, mutex with httpOnly
 	 */
 	private function generateWebsite( boolean httpOnly, boolean httpsOnly ){
-
 		var prefix = "http";
-		if( !isNull( arguments.httpsOnly ) ){
+		if ( !isNull( arguments.httpsOnly ) ) {
 			prefix = "https";
 		}
-		if( isNull( arguments.httpOnly ) && isNull( arguments.httpsOnly ) ){
-			prefix &= ( ( randRange(1, 10) % 2 ) ? "s" : "" );
+		if ( isNull( arguments.httpOnly ) && isNull( arguments.httpsOnly ) ) {
+			prefix &= ( ( randRange( 1, 10 ) % 2 ) ? "s" : "" );
 		}
 
 		var webPart = "";
-		if( ( randRange( 1, 10 ) % 2 ) ){
+		if ( ( randRange( 1, 10 ) % 2 ) ) {
 			webPart = "www.";
 		}
 
