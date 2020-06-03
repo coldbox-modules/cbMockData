@@ -239,9 +239,15 @@ component {
 
 		// If in Service mode, then add headers
 		if ( cgi.script_name contains "MockData.cfc" ) {
-			cfheader( name="Content-Type", value="application/json" );
+			cfheader(
+				name ="Content-Type",
+				value="application/json"
+			);
 			// CORS for web service calls
-			cfheader( name="Access-Control-Allow-Origin", value="*" );
+			cfheader(
+				name ="Access-Control-Allow-Origin",
+				value="*"
+			);
 		}
 
 		return result;
@@ -337,22 +343,22 @@ component {
 		if ( arguments.type == "datetime" ) {
 			return generateDateRange( showTime = true );
 		}
-		if ( arguments.type.find( "num" ) == 1 ) {
+		if ( arguments.type.findNoCase( "num" ) == 1 ) {
 			return generateNumber( arguments.type );
 		}
-		if ( arguments.type.find( "oneof" ) == 1 ) {
+		if ( arguments.type.findNoCase( "oneof" ) == 1 ) {
 			return generateOneOf( arguments.type );
 		}
-		if ( arguments.type.find( "lorem" ) == 1 ) {
+		if ( arguments.type.findNoCase( "lorem" ) == 1 ) {
 			return generateLorem( arguments.type );
 		}
-		if ( arguments.type.find( "baconlorem" ) == 1 ) {
+		if ( arguments.type.findNoCase( "baconlorem" ) == 1 ) {
 			return generateLorem( arguments.type );
 		}
-		if ( arguments.type.find( "sentence" ) == 1 ) {
+		if ( arguments.type.findNoCase( "sentence" ) == 1 ) {
 			return generateSentences( arguments.type );
 		}
-		if ( arguments.type.find( "words" ) == 1 ) {
+		if ( arguments.type.findNoCase( "words" ) == 1 ) {
 			return generateWords( arguments.type );
 		}
 
@@ -364,7 +370,10 @@ component {
 	 * @fieldModels A struct of name and type of the model to generate
 	 * @index The numerical index of the item being generated
 	 */
-	private struct function generateNewItem( required array fieldModels, required index ){
+	private struct function generateNewItem(
+		required array fieldModels,
+		required index
+	){
 		var result = {};
 		arguments.fieldModels.each( function( field ){
 			// Verify the field struct has a name, else generate it

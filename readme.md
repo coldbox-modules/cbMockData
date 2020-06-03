@@ -49,7 +49,7 @@ By default it will produce a glorious array of 10 objects of nothing! Since we d
 
 > **Note:** MockData uses CORS so if you're running a virtual domain then you will still be able to hit the service.(As long as you have a decent browser.)
 
-### Number of objects
+### Number of objects (`$num`)
 
 The number of objects to be returned by the service is determined by the `$num` argument, which defaults to `10` items:
 
@@ -86,6 +86,37 @@ var data = getInstance( "MockData@MockDataCFC" )
     .mock(
         $num = "rnd:10:20"
     );
+```
+
+### Available return types (`$returntype`)
+
+By default the service/method call will return X amount of records in the form of an array.  However, if you would like to just return an object literal representation you can do so via the `$returnType` argument.
+
+Available return types:
+
+* `array` - Default, returns an array of objects
+* `struct` - Returns an object literal struct
+
+```js
+// Method Call
+var data = getInstance( "MockData@MockDataCFC" )
+    .mock(
+		$returnType = "struct",
+		name = "name",
+		age = "age",
+		id = "uuid",
+		email = "email"
+	);
+// Service call
+http://127.0.0.1:60299/MockDataCFC?$returnType=struct&name=name&age=age&id=uuid&email=email
+
+// The output will be something like this
+{
+    "id": "91659091-A489-4706-BAC64FA8E1665509",
+    "name": "Danny Tobias",
+    "age": 33,
+    "email": "idegeneres@microsoft.com"
+}
 ```
 
 ### Available Mocking Types
