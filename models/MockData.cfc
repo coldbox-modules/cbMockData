@@ -4,11 +4,21 @@
  */
 component {
 
-	// Param default URL method if running cfc directly
+	/**
+	 * Direct method for URL mocking service
+	 */
 	param name="url.method" default="mock";
 
+	/**
+	 * --------------------------------------------------------------------------
+	 * Static Data Used For Generation
+	 * --------------------------------------------------------------------------
+	 */
+
+	variables.cwd = getDirectoryFromPath( getCurrentTemplatePath() );
+
 	// Defaults used for data, may move to a file later
-	variables.fNames = [
+	variables._firstNames = [
 		"Alexia",
 		"Alice",
 		"Amy",
@@ -53,7 +63,7 @@ component {
 		"Veronica"
 	];
 
-	variables.lNames = [
+	variables._lastNames = [
 		"Anderson",
 		"Bearenstein",
 		"Boudreaux",
@@ -86,7 +96,7 @@ component {
 		"Zelda"
 	];
 
-	variables.webDomains = [
+	variables._webDomains = [
 		"adobe.com",
 		"aol.com",
 		"apple.com",
@@ -115,23 +125,21 @@ component {
 		"test.com"
 	];
 
-	variables.lorem = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+	variables._loremData = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
-	variables.sentences = [
+	variables._words = deserializeJSON( fileRead( variables.cwd & "nouns.json" ) );
+
+	variables._adjectives = deserializeJSON( fileRead( variables.cwd & "adjectives.json" ) );
+
+	variables._baconloremData = arrayToList( [
 		"Bacon ipsum dolor amet bacon biltong brisket sirloin kielbasa",
 		"hock beef landjaeger boudin alcatra",
 		"sausage beef beef ribs pancetta pork chop doner short ribs",
 		"brisket alcatra shankle pork chop, turducken picanha",
 		"Venison doner leberkas turkey ball tip tongue"
-	];
+	] );
 
-	variables.words = listToArray(
-		"Aeroplane,Air,Aircraft,Airforce,Airport,Album,Alphabet,Apple,Arm,Army,Baby,Baby,Backpack,Balloon,Banana,Bank,Barbecue,Bathroom,Bathtub,Bed,Bed,Bee,Bible,Bible,Bird,Bomb,Book,Boss,Bottle,Bowl,Box,Boy,Brain,Bridge,Butterfly,Button,Cappuccino,Car,Car-race,Carpet,Carrot,Cave,Chair,Chess,Chief,Child,Chisel,Chocolates,Church,Church,Circle,Circus,Circus,Clock,Clown,Coffee,Coffee-shop,Comet,CompactDisc,Compass,Computer,Crystal,Cup,Cycle,DataBase,Desk,Diamond,Dress,Drill,Drink,Drum,Dung,Ears,Earth,Egg,Electricity,Elephant,Eraser,Explosive,Eyes,Family,Fan,Feather,Festival,Film,Finger,Fire,Floodlight,Flower,Foot,Fork,Freeway,Fruit,Fungus,Game,Garden,Gas,Gate,Gemstone,Girl,Gloves,God,Grapes,Guitar,Hammer,Hat,Hieroglyph,Highway,Horoscope,Horse,Hose,Ice,Ice-cream,Insect,Jetfighter,Junk,Kaleidoscope,Kitchen,Knife,Leather,Leg,Library,Liquid,Magnet,Man,Map,Maze,Meat,Meteor,Microscope,Milk,Milkshake,Mist,Money,Monster,Mosquito,Mouth,Nail,Navy,Necklace,Needle,Onion,PaintBrush,Pants,Parachute,Passport,Pebble,Pendulum,Pepper,Perfume,Pillow,Plane,Planet,Pocket,Post-office,Potato,Printer,Prison,Pyramid,Radar,Rainbow,Record,Restaurant,Rifle,Ring,Robot,Rock,Rocket,Roof,Room,Rope,Saddle,Salt,Sandpaper,Sandwich,Satellite,School,Ship,Shoes,Shop,Shower,Signature,Skeleton,Slave,Snail,Software,Solid,SpaceShuttle,Spectrum,Sphere,Spice,Spiral,Spoon,Sports-car,Spotlight,Square,Staircase,Star,Stomach,Sun,Sunglasses,Surveyor,Swimming,Sword,Table,Tapestry,Teeth,Telescope,Television,Tennis,Thermometer,Tiger,Toilet,Tongue,Torch,Torpedo,Train,Treadmill,Triangle,Tunnel,Typewriter,Umbrella,Vacuum,Vampire,Videotape,Vulture,Water,Weapon,Web,Wheelchair,Window,Woman,Worm,X-ray"
-	);
-
-	variables.baconlorem = arrayToList( variables.sentences );
-
-	variables.defaults = [
+	variables._defaultTypes = [
 		"age",
 		"all_age",
 		"baconlorem",
@@ -150,7 +158,7 @@ component {
 		"words"
 	];
 
-	variables.extensions = [
+	variables._extensions = [
 		".cfm",
 		".css",
 		".doc",
@@ -168,7 +176,7 @@ component {
 		".xlsx"
 	];
 
-	variables.imageExtensions = [
+	variables._imageExtensions = [
 		".svg",
 		".gif",
 		".jpg",
@@ -182,6 +190,8 @@ component {
 	/**
 	 * This function is the remote entry point for our service or data calls
 	 * The incoming arguments are evaluated for mocking data services.
+	 *
+	 * @return Array, struct, or single mocked data
 	 */
 	remote function mock() returnformat="json"{
 		// cfheader( name="Content-Type", value="text/html" );
@@ -253,23 +263,15 @@ component {
 		return result;
 	}
 
-	/***************************** PRIVATE ****************************************/
-
-	/**
-	 * Check if an incoming type exists in our default types
-	 * @target The target to check
-	 */
-	private boolean function isDefault( required target ){
-		return defaults.findNoCase( target ) > 0;
-	}
-
 	/**
 	 * Generate the fake data according to incoming type
 	 *
-	 * @type The valid incoming fake data type
-	 * @index The index location of the fake iteration
+	 * @type The valid incoming fake data type, see docs for valid types
+	 * @index The index location of the fake iteration if any
+	 *
+	 * @return The fake data
 	 */
-	private function generateFakeData( required type, required index ){
+	function generateFakeData( required type, index = 1 ){
 		// Supplier closure or lambda
 		if ( isClosure( arguments.type ) || isCustomFunction( arguments.type ) ) {
 			return arguments.type( arguments.index );
@@ -278,22 +280,22 @@ component {
 			return arguments.index;
 		}
 		if ( arguments.type == "ipaddress" ) {
-			return generateIpAddress();
+			return ipAddress();
 		}
 		if ( arguments.type.findNoCase( "string" ) == 1 ) {
-			return generateString( arguments.type );
+			return string( arguments.type );
 		}
 		if ( arguments.type == "uuid" ) {
 			return createUUID();
 		}
 		if ( arguments.type == "name" ) {
-			return generateFirstName() & " " & generateLastName();
+			return firstName() & " " & lastName();
 		}
 		if ( arguments.type == "fname" ) {
-			return generateFirstName();
+			return firstName();
 		}
 		if ( arguments.type == "lname" ) {
-			return generateLastName();
+			return lastName();
 		}
 		if ( arguments.type == "age" ) {
 			return randRange( 18, 75 );
@@ -302,134 +304,91 @@ component {
 			return randRange( 1, 100 );
 		}
 		if ( arguments.type == "email" ) {
-			return generateEmail();
+			return email();
 		}
 		if ( arguments.type == "imageurl" ) {
-			return generateImageUrl();
+			return imageUrl();
 		}
 		if ( arguments.type == "imageurl_http" ) {
-			return generateImageUrl( httpOnly = true );
+			return imageUrl( httpOnly = true );
 		}
 		if ( arguments.type == "imageurl_https" ) {
-			return generateImageUrl( httpsOnly = true );
+			return imageUrl( httpsOnly = true );
 		}
 		if ( arguments.type == "url" ) {
-			return generateUrl();
+			return uri();
 		}
 		if ( arguments.type == "url_http" ) {
-			return generateUrl( httpOnly = true );
+			return uri( httpOnly = true );
 		}
 		if ( arguments.type == "url_https" ) {
-			return generateUrl( httpsOnly = true );
+			return uri( httpsOnly = true );
 		}
 		if ( arguments.type == "website" ) {
-			return generateWebsite();
+			return websiteUrl();
 		}
 		if ( arguments.type == "website_http" ) {
-			return generateWebsite( httpOnly = true );
+			return websiteUrl( httpOnly = true );
 		}
 		if ( arguments.type == "website_https" ) {
-			return generateWebsite( httpsOnly = true );
+			return websiteUrl( httpsOnly = true );
 		}
 		if ( arguments.type == "ssn" ) {
-			return generateSSN();
+			return ssn();
 		}
 		if ( arguments.type == "tel" ) {
-			return generateTelephone();
+			return telephone();
 		}
 		if ( arguments.type == "date" ) {
-			return generateDateRange();
+			return dateRange();
 		}
 		if ( arguments.type == "datetime" ) {
-			return generateDateRange( showTime = true );
+			return dateRange( showTime = true );
 		}
 		if ( arguments.type.findNoCase( "num" ) == 1 ) {
-			return generateNumber( arguments.type );
+			return num(
+				arguments.type.find( ":" ) ? arguments.type.REreplaceNoCase( "num\:?", "" ) : javacast( "null", "" )
+			);
 		}
 		if ( arguments.type.findNoCase( "oneof" ) == 1 ) {
-			return generateOneOf( arguments.type );
+			return oneOf(
+				arguments.type.find( ":" ) ? arguments.type.REreplaceNoCase( "oneOf\:?", "" ) : javacast( "null", "" )
+			);
 		}
 		if ( arguments.type.findNoCase( "lorem" ) == 1 ) {
-			return generateLorem( arguments.type );
+			return lorem(
+				arguments.type.find( ":" ) ? arguments.type.REreplaceNoCase( "lorem\:?", "" ) : javacast( "null", "" )
+			);
 		}
 		if ( arguments.type.findNoCase( "baconlorem" ) == 1 ) {
-			return generateLorem( arguments.type );
+			return baconLorem(
+				arguments.type.find( ":" ) ? arguments.type.REreplaceNoCase( "baconlorem\:?", "" ) : javacast(
+					"null",
+					""
+				)
+			);
 		}
 		if ( arguments.type.findNoCase( "sentence" ) == 1 ) {
-			return generateSentences( arguments.type );
+			return sentence(
+				arguments.type.find( ":" ) ? arguments.type.REreplaceNoCase( "sentence\:?", "" ) : javacast(
+					"null",
+					""
+				)
+			);
 		}
 		if ( arguments.type.findNoCase( "words" ) == 1 ) {
-			return generateWords( arguments.type );
+			return words(
+				arguments.type.find( ":" ) ? arguments.type.REreplaceNoCase( "words\:?", "" ) : javacast( "null", "" )
+			);
 		}
 
 		return "No Type ['#arguments.type#'] Found";
 	}
 
-	/**
-	 * Generate a new mocked item
-	 * @fieldModels A struct of name and type of the model to generate
-	 * @index The numerical index of the item being generated
-	 */
-	private struct function generateNewItem(
-		required array fieldModels,
-		required index
-	){
-		var result = {};
-		arguments.fieldModels.each( function( field ){
-			// Verify the field struct has a name, else generate it
-			if ( !field.keyExists( "name" ) ) {
-				field.name = "field" & i;
-			}
-
-			// if we are a default, that is our type, otherwise string
-			if (
-				isSimpleValue( field.type )
-				&&
-				!field.type.len()
-				&&
-				isDefault( field.name )
-			) {
-				field.type = field.name;
-			}
-
-			// Determine the type of field model
-			if ( isStruct( field.type ) ) {
-				// Bind the return type as a struct
-				field.type.$returnType = "struct";
-				// The field model defines a single object relationship
-				result[ field.name ]   = mock( argumentCollection = field.type );
-			} else if ( isArray( field.type ) ) {
-				// The field model defines a one to many relationship
-				result[ field.name ] = mock( argumentCollection = field.type[ 1 ] );
-			} else {
-				// Generate the fake data
-				result[ field.name ] = generateFakeData( field.type, index );
-			}
-		} );
-
-		return result;
-	}
-
-	/**
-	 * Get the parts count from the incoming target type which can be
-	 * - type:max
-	 * - type:min:max
-	 */
-	private function getPartCounts( required target ){
-		// Calculate counts
-		var parts = target.listToArray( ":" );
-
-		if ( parts.len() == 2 ) {
-			return parts[ 2 ];
-		} else {
-			return randRange( parts[ 2 ], parts[ 3 ] );
-		}
-	}
-
 	/********************************* GENERATORS ********************************/
 
 	/**
-	 * Generate random strings according to the type
+	 * Generate random strings according to the passed string type
 	 *
 	 * The type can be of the following permutations pattern: string[-(secure|alpha|numeric):max]
 	 *
@@ -441,7 +400,7 @@ component {
 	 *
 	 * @type This can be string, or string:size
 	 */
-	private function generateString( required type ){
+	function string( required type ){
 		// Generation data
 		var alpha = listToArray(
 			"A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z"
@@ -499,122 +458,132 @@ component {
 	/**
 	 * Generate random words
 	 *
-	 * @type This can be words, or words:count
+	 * @size The number of words to generate or can be a min:max range to produce random number of words
 	 */
-	private function generateWords( required type ){
-		if ( type == "words" ) {
-			return words[ randRange( 1, arrayLen( words ) ) ];
+	function words( size = 1 ){
+		// Do we have a random size request?
+		if ( arguments.size.find( ":" ) ) {
+			arguments.size = randRange(
+				getToken( arguments.size, 1, ":" ),
+				getToken( arguments.size, 2, ":" )
+			);
 		}
-		if ( type.find( ":" ) > 1 ) {
-			var parts  = type.listToArray( ":" );
-			var result = "";
-			var count  = "";
-			if ( parts.len() == 2 ) {
-				count = parts[ 2 ];
+		// Generate it
+		var result = [];
+		for ( var i = 1; i <= arguments.size; i++ ) {
+			if ( i mod 2 > 0 ) {
+				result.append( variables._words[ randRange( 1, variables._words.len() ) ] );
 			} else {
-				count = randRange( parts[ 2 ], parts[ 3 ] );
+				result.append( variables._adjectives[ randRange( 1, variables._adjectives.len() ) ] );
 			}
-			for ( var i = 0; i < count; i++ ) {
-				result &= words[ randRange( 1, arrayLen( words ) ) ] & " ";
-			}
-			return result;
 		}
+		return result.toList( " " );
 	}
 
 	/**
 	 * Generate sentences
+	 *
+	 * @size The number of sentences to produce, default is 1, or pass in a min:max to produce random sentences
 	 */
-	private function generateSentences( required type ){
-		if ( arguments.type == "sentence" ) {
-			return sentences[ randRange( 1, arrayLen( sentences ) ) ];
+	function sentence( size = 1 ){
+		// Do we have a random size request?
+		if ( arguments.size.find( ":" ) ) {
+			arguments.size = randRange(
+				getToken( arguments.size, 1, ":" ),
+				getToken( arguments.size, 2, ":" )
+			);
 		}
-		if ( arguments.type.find( ":" ) > 1 ) {
-			var parts  = arguments.type.listToArray( ":" );
-			var result = "";
-			var count  = "";
-			if ( parts.len() == 2 ) {
-				count = parts[ 2 ];
-			} else {
-				count = randRange( parts[ 2 ], parts[ 3 ] );
-			}
-			for ( var i = 0; i < count; i++ ) {
-				result &= sentences[ randRange( 1, arrayLen( sentences ) ) ] & "\n\n";
-			}
-			return result;
+		// Generate it
+		var result = [];
+		for ( var i = 1; i <= arguments.size; i++ ) {
+			result.append( words( 15 ) & chr( 13 ) & chr( 10 ) );
 		}
+		return result.toList();
 	}
 
 	/**
 	 * Generate Lorem
-	 * @type The target type
+	 *
+	 * @size The number of sentences of lorem to produce, default is 1, or pass in a min:max to produce random sentences
 	 */
-	private function generateLorem( required type ){
-		if ( arguments.type == "lorem" ) {
-			return lorem;
+	function lorem( size = 1 ){
+		// Do we have a random size request?
+		if ( arguments.size.find( ":" ) ) {
+			arguments.size = randRange(
+				getToken( arguments.size, 1, ":" ),
+				getToken( arguments.size, 2, ":" )
+			);
 		}
-		if ( arguments.type == "baconlorem" ) {
-			return baconlorem;
+		// Generate it
+		var result = [];
+		for ( var i = 1; i <= arguments.size; i++ ) {
+			result.append( variables._loremData );
 		}
-
-		// Restricting by convention
-		if ( type.find( ":" ) > 1 ) {
-			var parts       = type.listToArray( ":" );
-			var result      = "";
-			var count       = "";
-			var targetLorem = ( arguments.type == "lorem" ? variables.lorem : variables.baconlorem );
-
-			if ( parts.len() == 2 ) {
-				count = parts[ 2 ];
-			} else {
-				count = randRange( parts[ 2 ], parts[ 3 ] );
-			}
-			for ( var i = 0; i < count; i++ ) {
-				result &= targetLorem & "\n\n";
-			}
-			return result;
-		}
+		return result.toList();
 	}
 
 	/**
-	 * generate one of functions
+	 * Generate bacon lorem text
+	 *
+	 * @size The number of sentences of lorem to produce, default is 1, or pass in a min:max to produce random sentences
 	 */
-	private function generateOneOf( required type ){
+	function baconLorem( size = 1 ){
+		// Do we have a random size request?
+		if ( arguments.size.find( ":" ) ) {
+			arguments.size = randRange(
+				getToken( arguments.size, 1, ":" ),
+				getToken( arguments.size, 2, ":" )
+			);
+		}
+		// Generate it
+		var result = [];
+		for ( var i = 1; i <= arguments.size; i++ ) {
+			result.append( variables._baconloremData );
+		}
+		return result.toList();
+	}
+
+	/**
+	 * Generate one of the data supplied randomly
+	 *
+	 * @data This can be a single value or a list of values val1:val2:valz
+	 */
+	function oneOf( required data ){
 		// Support oneof:male:female, ie, pick a random one
-		var items = arguments.type.listToArray( ":" );
-		items.deleteAt( 1 );
+		var items = arguments.data.listToArray( ":" );
 		return items[ randRange( 1, items.len() ) ];
 	}
 
 	/**
-	 * Generate a random number
+	 * Generate a random number, if no count is passed we use a ceiling of 10
+	 *
+	 * @count The count of numbers to generate. This can be a whole number or the `min:max` format
 	 */
-	private function generateNumber( required type ){
-		// Support num, num:10, num:1:10
-		if ( arguments.type == "num" ) {
-			return randRange( 1, 10 );
+	function num( count = 10 ){
+		// Basic generation
+		if ( !arguments.count.find( ":" ) ) {
+			return randRange( 1, arguments.count );
 		}
-		if ( arguments.type.find( ":" ) > 1 ) {
-			var parts = arguments.type.listToArray( ":" );
-			if ( parts.len() == 2 ) {
-				return randRange( 1, parts[ 2 ] );
-			}
-			return randRange( parts[ 2 ], parts[ 3 ] );
-		}
+		// Min/Max generation
+		return randRange(
+			getToken( arguments.count, 1, ":" ),
+			getToken( arguments.count, 2, ":" )
+		);
 	}
 
 	/**
 	 * Generate telephone
 	 */
-	private function generateTelephone(){
+	function telephone(){
 		return "(" & randRange( 1, 9 ) & randRange( 1, 9 ) & randRange( 1, 9 ) & ") " &
 		randRange( 1, 9 ) & randRange( 1, 9 ) & randRange( 1, 9 ) & "-" &
 		randRange( 1, 9 ) & randRange( 1, 9 ) & randRange( 1, 9 ) & randRange( 1, 9 );
 	}
 
 	/**
-	 * Generate SSN
+	 * Generate a social security number
 	 */
-	private function generateSSN(){
+	function ssn(){
 		return randRange( 1, 9 ) & randRange( 1, 9 ) & randRange( 1, 9 ) & "-" &
 		randRange( 1, 9 ) & randRange( 1, 9 ) & "-" &
 		randRange( 1, 9 ) & randRange( 1, 9 ) & randRange( 1, 9 ) & randRange( 1, 9 );
@@ -623,11 +592,11 @@ component {
 	/**
 	 * Generate an email
 	 */
-	private function generateEmail(){
-		var fname       = generateFirstName().toLowerCase();
-		var lname       = generateLastName().toLowerCase();
+	function email(){
+		var fname       = firstName().toLowerCase();
+		var lname       = lastName().toLowerCase();
 		var emailPrefix = fname.charAt( 1 ) & lname;
-		return emailPrefix & "@" & variables.webDomains[ randRange( 1, variables.webDomains.len() ) ];
+		return emailPrefix & "@" & variables._webDomains[ randRange( 1, variables._webDomains.len() ) ];
 	}
 
 	/**
@@ -636,44 +605,44 @@ component {
 	 * @httpOnly Only do http sites, mutex with httpsOnly
 	 * @httpsOnly Only do https sites, mutex with httpOnly
 	 */
-	private function generateImageUrl( boolean httpOnly, boolean httpsOnly ){
+	function imageUrl( boolean httpOnly, boolean httpsOnly ){
 		arguments.imageExtensions = true;
-		return generateUrl( argumentCollection = arguments );
+		return uri( argumentCollection = arguments );
 	}
 
 	/**
-	 * Generate a random URL including a random protocol
+	 * Generate a random URI including a random protocol
 	 *
 	 * @httpOnly Only do http sites, mutex with httpsOnly
 	 * @httpsOnly Only do https sites, mutex with httpOnly
 	 */
-	private function generateUrl(
+	function uri(
 		boolean httpOnly,
 		boolean httpsOnly,
 		boolean imageExtensions = false
 	){
-		var randomPaths = generateWords( "words:1:#randRange( 1, 5 )#" )
+		var randomPaths = words( "1:#randRange( 1, 5 )#" )
 			.listToArray( " " )
 			.toList( "/" )
 			.lcase();
 
 		var randomHash = "";
 		if ( ( randRange( 1, 10 ) % 2 ) ) {
-			randomHash = "###generateWords( "words" )#";
+			randomHash = "###words()#";
 		}
 
 		var randomFile = "";
 		if ( ( randRange( 1, 10 ) % 2 ) ) {
-			randomFile = generateWords( "words" );
+			randomFile = words();
 		}
 
 		if ( arguments.imageExtensions ) {
-			randomFile &= variables.imageExtensions[ randRange( 1, variables.imageExtensions.len() ) ];
+			randomFile &= variables._imageExtensions[ randRange( 1, variables._imageExtensions.len() ) ];
 		} else {
-			randomFile &= variables.extensions[ randRange( 1, variables.extensions.len() ) ];
+			randomFile &= variables._extensions[ randRange( 1, variables._extensions.len() ) ];
 		}
 
-		return generateWebsite( argumentCollection = arguments ) & "/" & randomPaths & randomFile & randomHash;
+		return websiteUrl( argumentCollection = arguments ) & "/" & randomPaths & randomFile & randomHash;
 	}
 
 	/**
@@ -682,7 +651,7 @@ component {
 	 * @httpOnly Only do http sites, mutex with httpsOnly
 	 * @httpsOnly Only do https sites, mutex with httpOnly
 	 */
-	private function generateWebsite( boolean httpOnly, boolean httpsOnly ){
+	function websiteUrl( boolean httpOnly, boolean httpsOnly ){
 		var prefix = "http";
 		if ( !isNull( arguments.httpsOnly ) ) {
 			prefix = "https";
@@ -696,29 +665,29 @@ component {
 			webPart = "www.";
 		}
 
-		return "#prefix#://" & webpart & variables.webDomains[ randRange( 1, variables.webDomains.len() ) ];
+		return "#prefix#://" & webpart & variables._webDomains[ randRange( 1, variables._webDomains.len() ) ];
 	}
 
 	/**
 	 * Generate an ip address
 	 */
-	private function generateIpAddress(){
+	function ipAddress(){
 		return "#randRange( 0, 255 )#.#randRange( 0, 255 )#.#randRange( 0, 255 )#.#randRange( 0, 255 )#";
 	}
 
 	/**
 	 * Generate a first name
 	 */
-	private function generateFirstName(){
-		return fNames[ randRange( 1, fNames.len() ) ];
+	function firstName(){
+		return variables._firstNames[ randRange( 1, variables._firstNames.len() ) ];
 	}
 
 	/**
 	 * Generate a last name
 	 * @return {[type]} [description]
 	 */
-	private function generateLastName(){
-		return lNames[ randRange( 1, lNames.len() ) ];
+	function lastName(){
+		return variables._lastNames[ randRange( 1, variables._lastNames.len() ) ];
 	}
 
 	/**
@@ -729,7 +698,7 @@ component {
 	 * @dateFormat  The date formatting to use
 	 * @timeFormat 	The time formmating to use
 	 */
-	private function generateDateRange(
+	function dateRange(
 		date from  = "#createDateTime( "2010", "01", "01", "0", "0", "0" )#",
 		date to    = "#now()#",
 		showTime   = false,
@@ -750,6 +719,66 @@ component {
 		} else {
 			return dateFormat( result, arguments.dateFormat );
 		}
+	}
+
+	/***************************** PRIVATE ****************************************/
+
+	/**
+	 * Check if an incoming type exists in our default types
+	 *
+	 * @target The target string to check
+	 */
+	private boolean function isDefaultType( required target ){
+		return variables._defaultTypes.findNoCase( arguments.target ) > 0;
+	}
+
+	/**
+	 * Generate a new mocked item, called by the mock() method when receiving arguments
+	 * and parsing them into field models
+	 *
+	 * @fieldModels An array of field model structs: { name : "fieldName", type : "mocking type" }
+	 * @index The numerical index of the item being generated
+	 *
+	 * @return The generated faked item
+	 */
+	private struct function generateNewItem(
+		required array fieldModels,
+		index = 1
+	){
+		var result = {};
+		arguments.fieldModels.each( function( field ){
+			// Verify the field struct has a name, else generate it
+			if ( !field.keyExists( "name" ) ) {
+				field.name = "field" & i;
+			}
+
+			// if we are a default, that is our type, otherwise string
+			if (
+				isSimpleValue( field.type )
+				&&
+				!field.type.len()
+				&&
+				isDefaultType( field.name )
+			) {
+				field.type = field.name;
+			}
+
+			// Determine the type of field model
+			if ( isStruct( field.type ) ) {
+				// Bind the return type as a struct
+				field.type.$returnType = "struct";
+				// The field model defines a single object relationship
+				result[ field.name ]   = mock( argumentCollection = field.type );
+			} else if ( isArray( field.type ) ) {
+				// The field model defines a one to many relationship
+				result[ field.name ] = mock( argumentCollection = field.type[ 1 ] );
+			} else {
+				// Generate the fake data
+				result[ field.name ] = generateFakeData( field.type, index );
+			}
+		} );
+
+		return result;
 	}
 
 }

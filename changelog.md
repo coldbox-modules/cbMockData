@@ -16,9 +16,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Changelog standards
 * Auto publishing to github (artifacts and changelogs)
 * Types are now case-insensitive when called: `num,oneof,lorem,baconlorem,sentence,words`  #5
+* `generateFakeData()` is now public
+* All generators can now be called individually by function name
+* `lorem,baconlorem,words,sentence` you can now produce random sizes with them via `min:max` notation
+* Optimized generation by using arrays instead of strings
+* Included libraries for nouns and adjectives
 
+### Changed
+
+* Access variables according to scopes instead of lookup
+* Internal data generation names to avoid method conflicts
+  
 ### Fixed
 
+* Access variables according to scopes
 * `$returnType` is not documented #8
 
 ----

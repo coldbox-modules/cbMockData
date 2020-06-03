@@ -83,12 +83,6 @@
 			"code": "COMPLEX_BOOLEAN_CHECK"
 		},
 		{
-			"code": "EXCESSIVE_FUNCTION_LENGTH"
-		},
-		{
-			"code": "EXCESSIVE_COMPONENT_LENGTH"
-		},
-		{
 			"code": "EXCESSIVE_ARGUMENTS"
 		},
 		{
