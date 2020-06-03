@@ -157,6 +157,28 @@ The available types MockDataCFC supports are:
 * `website_https` : Generates a random website, `https` only protocol
 * `words`: Generates a single word. If used as `word:N`, returns N words.  If used as `words:X:Y`, returns a random number of words beetween X and Y.
 
+### Calling Types By Function Name
+
+Please check out the apidocs at : https://apidocs.ortussolutions.com/#/coldbox-modules/MockDataCFC/ for the latest methods, but you can also use the mocking methods instead of going via the `mock()` method.
+
+* `baconLorem()`
+* `dateRange()`
+* `email()`
+* `firstName()`
+* `imageUrl()`
+* `ipAddress()`
+* `lastName()`
+* `lorem()`
+* `num()`
+* `oneOf()`
+* `sentence()`
+* `ssn()`
+* `string()`
+* `telephone()`
+* `uri()`
+* `websiteUrl()`
+* `words()`
+
 ### Supplier Type (Custom Data)
 
 You can also create your own content by using a supplier closure/lambda as your type.  This is a function that will create the content and return it for you.
