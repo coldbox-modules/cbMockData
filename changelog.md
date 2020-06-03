@@ -1,10 +1,48 @@
 # Changelog
 
-## 3.3.1
+All notable changes to this project will be documented in this file.
 
-* `bug` : param the default method when executing via URL instead of setting it.
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 3.3.0
+----
+
+## [3.4.0] => 2020-JUN-03
+
+### Added
+
+* `string` type re-architected to produce more randomness and more permutations according to our new generation pattern: `string[-(secure|alpha|numeric):max]` #6
+* More formatting rules
+* Changelog standards
+* Auto publishing to github (artifacts and changelogs)
+* Types are now case-insensitive when called: `num,oneof,lorem,baconlorem,sentence,words`  #5
+* `generateFakeData()` is now public
+* All generators can now be called individually by function name
+* `lorem,baconlorem,words,sentence` you can now produce random sizes with them via `min:max` notation
+* Optimized generation by using arrays instead of strings
+* Included libraries for nouns and adjectives
+
+### Changed
+
+* Access variables according to scopes instead of lookup
+* Internal data generation names to avoid method conflicts
+  
+### Fixed
+
+* Access variables according to scopes
+* `$returnType` is not documented #8
+
+----
+
+## [3.3.1] => 2020-APR-16
+
+### Fixed
+
+* param the default method when executing via URL instead of setting it.
+
+----
+
+## [3.3.0] => 2020-JAN-28
 
 ### New Features
 
@@ -25,7 +63,9 @@
 * Added new domains for more random generation
 * Removed spacing from words
 
-## 3.2.0
+----
+
+## [3.2.0] => 2020-JAN-08
 
 ### New Features
 
@@ -39,12 +79,16 @@
 * TestBox 3 upgrade
 * More direct scoping of the arguments scope
 
-## 3.1.0
+----
+
+## [3.1.0] => 2019-MAY-19
 
 * CommandBox ability to execute
 * Template updates to standards
 
-## 3.0.0
+----
+
+## [3.0.0] => 2018-SEP-4
 
 * **Compatibility** : `num` arguments have been dropped and you must use `$num` as the identifier for how many items you like
 * Introduction of nested mocking. You can now declare nested mocks as structs and the mock data will nest accordingly:
@@ -72,11 +116,15 @@ This will produce top level mock data with 2 books per record.
 * Updated readmes and syntax updates for modern engines
 * Upgraded to new ColdBox module Harness
 
-## 2.4.0
+----
+
+## [2.4.0]
 
 * Added auto-incrementing ID's FOR REAL this time
 
-## 2.3.0
+----
+
+## [2.3.0]
 
 * Added auto-incrementing ID's
 * Update on build control
@@ -86,17 +134,23 @@ This will produce top level mock data with 2 books per record.
 * Bug on `isDefault()` always returning true.
 * Added tests and automation
 
-## 2.2.0
+----
+
+## [2.2.0]
 
 * Made it a module as well for ColdBox apps.
 
-## 2.0.0
+----
+
+## [2.0.0]
 
 * Added support for words, sentences, uuid, bacon lorem, date and datetime
 * Added CommandBox Support
 * Added Documentation
 * Added ability to execute as a CFC instead of only via web service
 
-## 1.0.0
+----
+
+## [1.0.0]
 
 Original by Ray Camden

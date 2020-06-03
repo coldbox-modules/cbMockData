@@ -49,7 +49,7 @@ By default it will produce a glorious array of 10 objects of nothing! Since we d
 
 > **Note:** MockData uses CORS so if you're running a virtual domain then you will still be able to hit the service.(As long as you have a decent browser.)
 
-### Number of objects
+### Number of objects (`$num`)
 
 The number of objects to be returned by the service is determined by the `$num` argument, which defaults to `10` items:
 
@@ -88,6 +88,37 @@ var data = getInstance( "MockData@MockDataCFC" )
     );
 ```
 
+### Available return types (`$returntype`)
+
+By default the service/method call will return X amount of records in the form of an array.  However, if you would like to just return an object literal representation you can do so via the `$returnType` argument.
+
+Available return types:
+
+* `array` - Default, returns an array of objects
+* `struct` - Returns an object literal struct
+
+```js
+// Method Call
+var data = getInstance( "MockData@MockDataCFC" )
+    .mock(
+		$returnType = "struct",
+		name = "name",
+		age = "age",
+		id = "uuid",
+		email = "email"
+	);
+// Service call
+http://127.0.0.1:60299/MockDataCFC?$returnType=struct&name=name&age=age&id=uuid&email=email
+
+// The output will be something like this
+{
+    "id": "91659091-A489-4706-BAC64FA8E1665509",
+    "name": "Danny Tobias",
+    "age": 33,
+    "email": "idegeneres@microsoft.com"
+}
+```
+
 ### Available Mocking Types
 
 The available types MockDataCFC supports are:
@@ -113,6 +144,9 @@ The available types MockDataCFC supports are:
 * `sentence`: Generates a sentences. If used as `sentence:N`, returns N sentences.  If used as `sentence:X:Y`, returns a random number of sentences beetween X and Y.
 * `ssn`: Generates a random Social Security number.
 * `string`: Generates a random string of length 10 by default.  You can increase the length by passing it `string:length`.
+* `string-alpha` : Generates a random alpha string of length 10 by default.  You can increase the length by passing it `string-alpha:length`.
+* `string-numeric` : Generates a random numeric string of length 10 by default.  You can increase the length by passing it `string-numeric:length`.
+* `string-secure` : Generates a random secure (alpha+numeric+symbols) string of length 10 by default.  You can increase the length by passing it `string-secure:length`.
 * `tel`: Generates a random (American) telephone number.
 * `uuid`: Generates a random UUID
 * `url` : Generates a random URL with a random protocol
@@ -122,6 +156,28 @@ The available types MockDataCFC supports are:
 * `website_http` : Generates a random website, `http` only protocol
 * `website_https` : Generates a random website, `https` only protocol
 * `words`: Generates a single word. If used as `word:N`, returns N words.  If used as `words:X:Y`, returns a random number of words beetween X and Y.
+
+### Calling Types By Function Name
+
+Please check out the apidocs at : https://apidocs.ortussolutions.com/#/coldbox-modules/MockDataCFC/ for the latest methods, but you can also use the mocking methods instead of going via the `mock()` method.
+
+* `baconLorem()`
+* `dateRange()`
+* `email()`
+* `firstName()`
+* `imageUrl()`
+* `ipAddress()`
+* `lastName()`
+* `lorem()`
+* `num()`
+* `oneOf()`
+* `sentence()`
+* `ssn()`
+* `string()`
+* `telephone()`
+* `uri()`
+* `websiteUrl()`
+* `words()`
 
 ### Supplier Type (Custom Data)
 
