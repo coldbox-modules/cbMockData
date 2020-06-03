@@ -164,6 +164,22 @@ component extends="coldbox.system.testing.BaseTestCase" appMapping="root" {
 				expect( r[ 1 ].test ).toHaveLength( 10 );
 			} );
 
+			it( "can generate an alpha string", function(){
+				var r = mockDataCFC.mock( test = "string-alpha" );
+				debug( r );
+				expect( r[ 1 ].test ).toHaveLength( 10 );
+			} );
+			it( "can generate a secure string", function(){
+				var r = mockDataCFC.mock( test = "string-secure" );
+				debug( r );
+				expect( r[ 1 ].test ).toHaveLength( 10 );
+			} );
+			it( "can generate a numeric string", function(){
+				var r = mockDataCFC.mock( test = "string-numeric" );
+				debug( r );
+				expect( r[ 1 ].test ).toHaveLength( 10 );
+			} );
+
 			it( "can generate a big string", function(){
 				var r = mockDataCFC.mock( test = "string:200" );
 				debug( r );
@@ -179,6 +195,16 @@ component extends="coldbox.system.testing.BaseTestCase" appMapping="root" {
 						r[ 1 ].test
 					)
 				).toBeTrue();
+			} );
+
+			it( "can generate a struct $returnType", function(){
+				var r = mockDataCFC.mock(
+					$returnType = "struct",
+					test        = "string:200",
+					name        = "name"
+				);
+				debug( r );
+				expect( r ).toBeStruct().toHaveKey( "test,name" );
 			} );
 		} );
 	}

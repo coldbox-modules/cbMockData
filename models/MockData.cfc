@@ -429,18 +429,6 @@ component {
 	/********************************* GENERATORS ********************************/
 
 	/**
-	 * Generate a SHA-512 hash with no - dashes
-	 */
-	private function generateHash(){
-		return replace(
-			hash( now(), "SHA-512" ),
-			"-",
-			"",
-			"all"
-		);
-	}
-
-	/**
 	 * Generate random strings according to the type
 	 *
 	 * The type can be of the following permutations pattern: string[-(secure|alpha|numeric):max]
