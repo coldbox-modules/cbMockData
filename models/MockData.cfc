@@ -462,7 +462,7 @@ component {
 	 */
 	function words( size = 1 ){
 		// Do we have a random size request?
-		if ( arguments.size.find( ":" ) ) {
+		if ( find( arguments.size, ":" ) ) {
 			arguments.size = randRange(
 				getToken( arguments.size, 1, ":" ),
 				getToken( arguments.size, 2, ":" )
@@ -487,7 +487,7 @@ component {
 	 */
 	function sentence( size = 1 ){
 		// Do we have a random size request?
-		if ( arguments.size.find( ":" ) ) {
+		if ( find( arguments.size, ":" ) ) {
 			arguments.size = randRange(
 				getToken( arguments.size, 1, ":" ),
 				getToken( arguments.size, 2, ":" )
@@ -508,7 +508,7 @@ component {
 	 */
 	function lorem( size = 1 ){
 		// Do we have a random size request?
-		if ( arguments.size.find( ":" ) ) {
+		if ( find( arguments.size, ":" ) ) {
 			arguments.size = randRange(
 				getToken( arguments.size, 1, ":" ),
 				getToken( arguments.size, 2, ":" )
@@ -529,7 +529,7 @@ component {
 	 */
 	function baconLorem( size = 1 ){
 		// Do we have a random size request?
-		if ( arguments.size.find( ":" ) ) {
+		if ( find( arguments.size, ":" ) ) {
 			arguments.size = randRange(
 				getToken( arguments.size, 1, ":" ),
 				getToken( arguments.size, 2, ":" )
@@ -561,7 +561,7 @@ component {
 	 */
 	function num( count = 10 ){
 		// Basic generation
-		if ( !arguments.count.find( ":" ) ) {
+		if ( !find( arguments.count, ":" ) ) {
 			return randRange( 1, arguments.count );
 		}
 		// Min/Max generation
