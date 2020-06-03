@@ -280,7 +280,7 @@ component {
 		if ( arguments.type == "ipaddress" ) {
 			return generateIpAddress();
 		}
-		if ( arguments.type.find( "string" ) == 1 ) {
+		if ( arguments.type.findNoCase( "string" ) == 1 ) {
 			return generateString( arguments.type );
 		}
 		if ( arguments.type == "uuid" ) {
@@ -441,31 +441,71 @@ component {
 	}
 
 	/**
-	 * Generate random strings
+	 * Generate random strings according to the type
 	 *
-	 * @type This can be strings, or strings:lettersMax
+	 * The type can be of the following permutations pattern: string[-(secure|alpha|numeric):max]
+	 *
+	 * string - Generate 10 alphanumeric characters
+	 * string:max - Generate {max} count of alphanumeric characters
+	 * string-numeric - Generate numeric characters
+	 * string-alpha - Generate alpha characters
+	 * string-secure - Generate alpha+numeric+secure characters
+	 *
+	 * @type This can be string, or string:size
 	 */
 	private function generateString( required type ){
-		// Default is 10 characters
-		if ( type == "string" ) {
-			return left( generateHash(), 10 );
+		// Generation data
+		var alpha = listToArray(
+			"A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z"
+		);
+		var numeric = listToArray( "0,1,2,3,4,5,6,7,8,9" );
+		var secure  = listToArray( "!,@,$,%,&,*,-,_,=,+,?,~" );
+
+		// The return type to use: alphanumeric (default), alpha, numeric, secure
+		if ( arguments.type.findNoCase( "string-alphanumeric" ) ) {
+			var returnType = "alphanumeric";
+		} else if ( arguments.type.findNoCase( "string-numeric" ) ) {
+			var returnType = "numeric";
+		} else if ( arguments.type.findNoCase( "string-alpha" ) ) {
+			var returnType = "alpha";
+		} else if ( arguments.type.findNoCase( "string-secure" ) ) {
+			var returnType = "secure";
+		} else {
+			var returnType = "alphanumeric";
 		}
 
-		// Else choose length via : parts
-		if ( type.find( ":" ) > 1 ) {
-			// Calculate counts
-			var result = "";
-			var count  = getToken( type, 2, ":" );
-			// Calculate Blocks
-			var blocks = ceiling( count / 128 );
+		// Check incoming type, if default of `string` default to 10 chars
+		if ( !arguments.type.find( ":" ) ) {
+			arguments.type &= ":10";
+		}
 
-			// Generate strings
-			for ( var i = 0; i < blocks; i++ ) {
-				result &= generateHash();
+		// Prepare Data List
+		switch ( returnType ) {
+			case "alpha": {
+				var dataList = alpha;
+				break;
 			}
-
-			return left( result, count );
+			case "numeric": {
+				var dataList = numeric;
+				break;
+			}
+			case "secure": {
+				var dataList = alpha.append( numeric.append( secure, true ), true );
+				break;
+			}
+			default: {
+				var dataList = alpha.append( numeric, true );
+			}
 		}
+
+		// Iterate and create string
+		var result = "";
+		var count  = getToken( arguments.type, 2, ":" );
+		for ( var i = 1; i <= count; i++ ) {
+			result &= dataList[ randRange( 1, dataList.len() ) ];
+		}
+
+		return result;
 	}
 
 	/**

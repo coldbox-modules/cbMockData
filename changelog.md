@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+* `string` type re-architected to produce more randomness and more permutations according to our new generation pattern: `string[-(secure|alpha|numeric):max]` #6
 * More formatting rules
 * Changelog standards
 * Auto publishing to github (artifacts and changelogs)

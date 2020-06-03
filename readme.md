@@ -144,6 +144,9 @@ The available types MockDataCFC supports are:
 * `sentence`: Generates a sentences. If used as `sentence:N`, returns N sentences.  If used as `sentence:X:Y`, returns a random number of sentences beetween X and Y.
 * `ssn`: Generates a random Social Security number.
 * `string`: Generates a random string of length 10 by default.  You can increase the length by passing it `string:length`.
+* `string-alpha` : Generates a random alpha string of length 10 by default.  You can increase the length by passing it `string-alpha:length`.
+* `string-numeric` : Generates a random numeric string of length 10 by default.  You can increase the length by passing it `string-numeric:length`.
+* `string-secure` : Generates a random secure (alpha+numeric+symbols) string of length 10 by default.  You can increase the length by passing it `string-secure:length`.
 * `tel`: Generates a random (American) telephone number.
 * `uuid`: Generates a random UUID
 * `url` : Generates a random URL with a random protocol
