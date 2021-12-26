@@ -288,6 +288,9 @@ component {
 		if ( arguments.type == "uuid" ) {
 			return createUUID();
 		}
+		if ( arguments.type == "guid" ) {
+			return insert( "-", createUUID(), 23);
+		}
 		if ( arguments.type == "name" ) {
 			return firstName() & " " & lastName();
 		}

@@ -206,6 +206,11 @@ component extends="coldbox.system.testing.BaseTestCase" appMapping="root" {
 				debug( r );
 				expect( r ).toBeStruct().toHaveKey( "test,name" );
 			} );
+
+			it( "can generate guids", function(){
+				var r = mockDataCFC.mock( id = "guid" );
+					expect( r[ 1 ].id ).toHaveLength( 36 );
+			} );
 		} );
 	}
 
