@@ -148,6 +148,7 @@ component {
 		"email",
 		"fname",
 		"gps",
+		"guid",
 		"lname",
 		"name",
 		"num",
@@ -289,7 +290,7 @@ component {
 			return createUUID();
 		}
 		if ( arguments.type == "guid" ) {
-			return insert( "-", createUUID(), 23);
+			return insert("-",createUUID(),23).lcase();
 		}
 		if ( arguments.type == "name" ) {
 			return firstName() & " " & lastName();
