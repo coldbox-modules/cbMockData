@@ -251,13 +251,13 @@ component {
 		// If in Service mode, then add headers
 		if ( cgi.script_name contains "MockData.cfc" ) {
 			cfheader(
-				name ="Content-Type",
-				value="application/json"
+				name  = "Content-Type",
+				value = "application/json"
 			);
 			// CORS for web service calls
 			cfheader(
-				name ="Access-Control-Allow-Origin",
-				value="*"
+				name  = "Access-Control-Allow-Origin",
+				value = "*"
 			);
 		}
 
@@ -290,7 +290,7 @@ component {
 			return createUUID();
 		}
 		if ( arguments.type == "guid" ) {
-			return insert("-",createUUID(),23).lcase();
+			return insert( "-", createUUID(), 23 ).lcase();
 		}
 		if ( arguments.type == "name" ) {
 			return firstName() & " " & lastName();
