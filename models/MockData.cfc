@@ -249,15 +249,9 @@ component {
 
 		// If in Service mode, then add headers
 		if ( cgi.script_name contains "MockData.cfc" ) {
-			cfheader(
-				name ="Content-Type",
-				value="application/json"
-			);
+			cfheader( name = "Content-Type", value = "application/json" );
 			// CORS for web service calls
-			cfheader(
-				name ="Access-Control-Allow-Origin",
-				value="*"
-			);
+			cfheader( name = "Access-Control-Allow-Origin", value = "*" );
 		}
 
 		return result;
@@ -266,7 +260,7 @@ component {
 	/**
 	 * Generate the fake data according to incoming type
 	 *
-	 * @type The valid incoming fake data type, see docs for valid types
+	 * @type  The valid incoming fake data type, see docs for valid types
 	 * @index The index location of the fake iteration if any
 	 *
 	 * @return The fake data
@@ -347,17 +341,26 @@ component {
 		}
 		if ( arguments.type.findNoCase( "num" ) == 1 ) {
 			return num(
-				arguments.type.find( ":" ) ? arguments.type.REreplaceNoCase( "num\:?", "" ) : javacast( "null", "" )
+				arguments.type.find( ":" ) ? arguments.type.REreplaceNoCase( "num\:?", "" ) : javacast(
+					"null",
+					""
+				)
 			);
 		}
 		if ( arguments.type.findNoCase( "oneof" ) == 1 ) {
 			return oneOf(
-				arguments.type.find( ":" ) ? arguments.type.REreplaceNoCase( "oneOf\:?", "" ) : javacast( "null", "" )
+				arguments.type.find( ":" ) ? arguments.type.REreplaceNoCase( "oneOf\:?", "" ) : javacast(
+					"null",
+					""
+				)
 			);
 		}
 		if ( arguments.type.findNoCase( "lorem" ) == 1 ) {
 			return lorem(
-				arguments.type.find( ":" ) ? arguments.type.REreplaceNoCase( "lorem\:?", "" ) : javacast( "null", "" )
+				arguments.type.find( ":" ) ? arguments.type.REreplaceNoCase( "lorem\:?", "" ) : javacast(
+					"null",
+					""
+				)
 			);
 		}
 		if ( arguments.type.findNoCase( "baconlorem" ) == 1 ) {
@@ -378,7 +381,10 @@ component {
 		}
 		if ( arguments.type.findNoCase( "words" ) == 1 ) {
 			return words(
-				arguments.type.find( ":" ) ? arguments.type.REreplaceNoCase( "words\:?", "" ) : javacast( "null", "" )
+				arguments.type.find( ":" ) ? arguments.type.REreplaceNoCase( "words\:?", "" ) : javacast(
+					"null",
+					""
+				)
 			);
 		}
 
@@ -463,10 +469,7 @@ component {
 	function words( size = 1 ){
 		// Do we have a random size request?
 		if ( find( ":", arguments.size ) ) {
-			arguments.size = randRange(
-				getToken( arguments.size, 1, ":" ),
-				getToken( arguments.size, 2, ":" )
-			);
+			arguments.size = randRange( getToken( arguments.size, 1, ":" ), getToken( arguments.size, 2, ":" ) );
 		}
 		// Generate it
 		var result = [];
@@ -488,10 +491,7 @@ component {
 	function sentence( size = 1 ){
 		// Do we have a random size request?
 		if ( find( ":", arguments.size ) ) {
-			arguments.size = randRange(
-				getToken( arguments.size, 1, ":" ),
-				getToken( arguments.size, 2, ":" )
-			);
+			arguments.size = randRange( getToken( arguments.size, 1, ":" ), getToken( arguments.size, 2, ":" ) );
 		}
 		// Generate it
 		var result = [];
@@ -509,10 +509,7 @@ component {
 	function lorem( size = 1 ){
 		// Do we have a random size request?
 		if ( find( ":", arguments.size ) ) {
-			arguments.size = randRange(
-				getToken( arguments.size, 1, ":" ),
-				getToken( arguments.size, 2, ":" )
-			);
+			arguments.size = randRange( getToken( arguments.size, 1, ":" ), getToken( arguments.size, 2, ":" ) );
 		}
 		// Generate it
 		var result = [];
@@ -530,10 +527,7 @@ component {
 	function baconLorem( size = 1 ){
 		// Do we have a random size request?
 		if ( find( ":", arguments.size ) ) {
-			arguments.size = randRange(
-				getToken( arguments.size, 1, ":" ),
-				getToken( arguments.size, 2, ":" )
-			);
+			arguments.size = randRange( getToken( arguments.size, 1, ":" ), getToken( arguments.size, 2, ":" ) );
 		}
 		// Generate it
 		var result = [];
@@ -565,10 +559,7 @@ component {
 			return randRange( 1, arguments.count );
 		}
 		// Min/Max generation
-		return randRange(
-			getToken( arguments.count, 1, ":" ),
-			getToken( arguments.count, 2, ":" )
-		);
+		return randRange( getToken( arguments.count, 1, ":" ), getToken( arguments.count, 2, ":" ) );
 	}
 
 	/**
@@ -602,7 +593,7 @@ component {
 	/**
 	 * Generate a random image URL including a random protocol
 	 *
-	 * @httpOnly Only do http sites, mutex with httpsOnly
+	 * @httpOnly  Only do http sites, mutex with httpsOnly
 	 * @httpsOnly Only do https sites, mutex with httpOnly
 	 */
 	function imageUrl( boolean httpOnly, boolean httpsOnly ){
@@ -613,7 +604,7 @@ component {
 	/**
 	 * Generate a random URI including a random protocol
 	 *
-	 * @httpOnly Only do http sites, mutex with httpsOnly
+	 * @httpOnly  Only do http sites, mutex with httpsOnly
 	 * @httpsOnly Only do https sites, mutex with httpOnly
 	 */
 	function uri(
@@ -648,7 +639,7 @@ component {
 	/**
 	 * Generate a random website including random protocol
 	 *
-	 * @httpOnly Only do http sites, mutex with httpsOnly
+	 * @httpOnly  Only do http sites, mutex with httpsOnly
 	 * @httpsOnly Only do https sites, mutex with httpOnly
 	 */
 	function websiteUrl( boolean httpOnly, boolean httpsOnly ){
@@ -684,6 +675,7 @@ component {
 
 	/**
 	 * Generate a last name
+	 *
 	 * @return {[type]} [description]
 	 */
 	function lastName(){
@@ -692,11 +684,12 @@ component {
 
 	/**
 	 * Genereate a random data range
-	 * @from 		The date time start
-	 * @to 			The end date else defaults to today
-	 * @showTime 	Show time in the data
-	 * @dateFormat  The date formatting to use
-	 * @timeFormat 	The time formmating to use
+	 *
+	 * @from       The date time start
+	 * @to         The end date else defaults to today
+	 * @showTime   Show time in the data
+	 * @dateFormat The date formatting to use
+	 * @timeFormat The time formmating to use
 	 */
 	function dateRange(
 		date from  = "#createDateTime( "2010", "01", "01", "0", "0", "0" )#",
@@ -706,13 +699,8 @@ component {
 		timeFormat = "medium"
 	){
 		var timeDifference = dateDiff( "s", arguments.from, arguments.to );
-		var timeIncrement  = createTimespan(
-			0,
-			0,
-			0,
-			randRange( 0, timeDifference )
-		);
-		var result = arguments.from + timeIncrement;
+		var timeIncrement  = createTimespan( 0, 0, 0, randRange( 0, timeDifference ) );
+		var result         = arguments.from + timeIncrement;
 
 		if ( arguments.showTime ) {
 			return dateFormat( result, arguments.dateFormat ) & " " & timeFormat( result, arguments.timeFormat );
@@ -737,14 +725,11 @@ component {
 	 * and parsing them into field models
 	 *
 	 * @fieldModels An array of field model structs: { name : "fieldName", type : "mocking type" }
-	 * @index The numerical index of the item being generated
+	 * @index       The numerical index of the item being generated
 	 *
 	 * @return The generated faked item
 	 */
-	private struct function generateNewItem(
-		required array fieldModels,
-		index = 1
-	){
+	private struct function generateNewItem( required array fieldModels, index = 1 ){
 		var result = {};
 		arguments.fieldModels.each( function( field ){
 			// Verify the field struct has a name, else generate it

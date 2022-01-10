@@ -189,12 +189,7 @@ component extends="coldbox.system.testing.BaseTestCase" appMapping="root" {
 			it( "can generate an ip address", function(){
 				var r = mockDataCFC.mock( test = "ipaddress" );
 				debug( r );
-				expect(
-					reFindNoCase(
-						"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$",
-						r[ 1 ].test
-					)
-				).toBeTrue();
+				expect( reFindNoCase( "^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$", r[ 1 ].test ) ).toBeTrue();
 			} );
 
 			it( "can generate a struct $returnType", function(){
