@@ -39,6 +39,11 @@ component extends="coldbox.system.testing.BaseTestCase" appMapping="root" {
 				expect( r[ 1 ].id ).toBeUUID();
 			} );
 
+			it( "can generate guids", function(){
+				var r = mockDataCFC.mock( id = "guid" );
+				expect( r[ 1 ].id ).toHaveLength( 36 );
+			} );
+
 			it( "can generate names", function(){
 				var r = mockDataCFC.mock( name = "name" );
 				expect( r[ 1 ].name ).toInclude( " " );

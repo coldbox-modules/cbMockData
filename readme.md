@@ -148,6 +148,7 @@ The available types MockDataCFC supports are:
 * `string-numeric` : Generates a random numeric string of length 10 by default.  You can increase the length by passing it `string-numeric:length`.
 * `string-secure` : Generates a random secure (alpha+numeric+symbols) string of length 10 by default.  You can increase the length by passing it `string-secure:length`.
 * `tel`: Generates a random (American) telephone number.
+* `guid`: Generates a 36 characgter Microsoft formatted GUID
 * `uuid`: Generates a random UUID
 * `url` : Generates a random URL with a random protocol
 * `url_http` : Generates a random URL with `http` only protocol

@@ -7,12 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ----
 
-## [3.5.0] => 2022-JAN
+## [3.5.0] => 2022-JAN-11
 
 ### Added
 
 * Github actions migration
 * Formatting and code quality rules
+* `guid` generator thanks to @djcard
 
 ----
 
