@@ -29,11 +29,7 @@ component {
 		// SES Routes
 		routes = [
 			// Module Entry Point
-			{
-				pattern : "/",
-				handler : "Main",
-				action  : "index"
-			},
+			{ pattern : "/", handler : "Main", action : "index" },
 			// Convention Route
 			{ pattern : "/:handler/:action?" }
 		];
