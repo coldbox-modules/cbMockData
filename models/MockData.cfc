@@ -703,8 +703,7 @@ component {
 		timeFormat = "medium"
 	){
 		var timeDifference = dateDiff( "s", arguments.from, arguments.to );
-		var timeIncrement  = createTimespan( 0, 0, 0, randRange( 0, timeDifference ) );
-		var result         = arguments.from + timeIncrement;
+		var result         = dateAdd( "s", randRange( 0, timeDifference ), arguments.from );
 
 		if ( arguments.showTime ) {
 			return dateFormat( result, arguments.dateFormat ) & " " & timeFormat( result, arguments.timeFormat );
