@@ -7,7 +7,7 @@ on:
 
 jobs:
   tests:
-    uses: coldbox-modules/MockDataCFC/.github/workflows/tests.yml@development
+    uses: ortus-solutions/MockDataCFC/.github/workflows/tests.yml@development
 
   # Format PR
   format:
