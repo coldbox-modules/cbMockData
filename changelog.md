@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ----
 
+## [3.6.0] => 2022-SEP-22
+
+### Added
+
+* New module layout
+
+### Fixed
+
+* DateRanges
+
+----
+
 ## [3.5.0] => 2022-JAN-11
 
 ### Added

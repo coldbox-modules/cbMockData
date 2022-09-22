@@ -10,7 +10,14 @@
         },
         "rewrites":{
             "enable":"true"
+        },
+        "webroot":"test-harness",
+        "aliases":{
+            "/moduleroot/MockDataCFC":"../"
         }
     },
-    "openBrowser":"false"
+    "openBrowser":"false",
+    "cfconfig":{
+        "file":".cfconfig.json"
+    }
 }
