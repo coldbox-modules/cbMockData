@@ -39,9 +39,9 @@ jobs:
           java-version: "11"
 
       - name: Setup CommandBox
-        uses: Ortus-Solutions/setup-commandbox@main
+        uses: Ortus-Solutions/setup-commandbox@2.0.1
         with:
-          forgeboxAPIKey: ${{ secrets.FORGEBOX_TOKEN }}
+          forgeboxAPIKey: ${{ secrets.FORGEBOX_API_TOKEN }}
 
       - name: Setup Environment Variables For Build Process
         id: current_version
