@@ -60,7 +60,7 @@ http://localhost:3000/?$num=5
 # ColdBox Module Service
 http://localhost:8080/mockdataCFC?$num=5
 
-# Module API
+# object
 var data = getInstance( "MockData@MockDataCFC" )
     .mock(
         $num = 5
@@ -69,10 +69,10 @@ var data = getInstance( "MockData@MockDataCFC" )
 
 #### Random Numbers
 
-You can also specify a random return number by using the following forms:
+You can also specify a random return number by using the `rnd` or `rand` suffix in the following forms:
 
 * `$num:rand:10` - A random number between 1-10.
-* `$num:rand:5:20` - A random number between 5-20.
+* `$num:rnd:5:20` - A random number between 5-20.
 
 ```js
 # service call
@@ -88,13 +88,13 @@ var data = getInstance( "MockData@MockDataCFC" )
     );
 ```
 
-### Available return types (`$returntype`)
+### Available Return Types : (`$returntype`)
 
-By default the service/method call will return X amount of records in the form of an array.  However, if you would like to just return an object literal representation you can do so via the `$returnType` argument.
+By default the service/method call will return **X** amount of records in the form of an `array`.  However, if you would like to just return an object literal representation you can do so by using the `$returnType` argument.
 
 Available return types:
 
-* `array` - Default, returns an array of objects
+* `array` - **Default**, returns an array of objects
 * `struct` - Returns an object literal struct
 
 ```js
@@ -107,9 +107,14 @@ var data = getInstance( "MockData@MockDataCFC" )
 		id = "uuid",
 		email = "email"
 	);
+
 // Service call
 http://127.0.0.1:60299/MockDataCFC?$returnType=struct&name=name&age=age&id=uuid&email=email
+```
 
+The output will be something like this:
+
+```js
 // The output will be something like this
 {
     "id": "91659091-A489-4706-BAC64FA8E1665509",
@@ -184,7 +189,7 @@ Please check out the apidocs at : https://apidocs.ortussolutions.com/#/coldbox-m
 
 You can also create your own content by using a supplier closure/lambda as your type.  This is a function that will create the content and return it for you.
 
-> Please note that this only works when using the direct function call approach, not the service
+> Please note that this only works when using the direct function call approach, not the REST service since you have to pass in a closure.
 
 ```js
 "name" : function( index ){
@@ -192,7 +197,14 @@ You can also create your own content by using a supplier closure/lambda as your 
 }
 ```
 
-The function receives the currently iterating `index` as an argument as well.  All you need to do is return back content.
+The function receives the currently iterating `index` as an argument as well.  All you need to do is return back content.  Here is another example to return a random item from an array:
+
+```js
+"name" : ( index ) => {
+	var names = [ "luis", "joe", "jose" ];
+	return names[ randRange( 1, names.len() ) ];
+}
+```
 
 ### Mocking DSL
 
@@ -321,7 +333,7 @@ getInstance( "MockData@MockDataCFC" )
 
 #### Nested Array of Values
 
-To create nested array of values you will define the name of the property and then an array with a struct defining how many and of which type using the special keys: `$num, $type`
+To create nested array of values you will define the `name` of the property and then an array with a struct defining how many and of which type using the special keys: `$num, $type`
 
 ```js
 // array of values

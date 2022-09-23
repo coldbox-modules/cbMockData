@@ -8,11 +8,13 @@
         "coldbox":"*"
     },
     "devDependencies":{
-        "testbox":"*"
+        "testbox":"*",
+        "cbdebugger":"be"
     },
     "installPaths":{
         "coldbox":"coldbox/",
-        "testbox":"testbox/"
+        "testbox":"testbox/",
+        "cbdebugger":"modules/cbdebugger/"
     },
     "testbox":{
         "runner":"http://localhost:60299/tests/runner.cfm"
