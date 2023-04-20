@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ----
 
+## [Unreleased]
+
+### Added
+
+- Github actions updates
+- ColdBox 7 auto testing
+
 ## [3.6.0] => 2022-SEP-22
 
 ### Added
@@ -17,8 +24,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * DateRanges
 
-----
-
 ## [3.5.0] => 2022-JAN-11
 
 ### Added
@@ -26,8 +31,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Github actions migration
 * Formatting and code quality rules
 * `guid` generator thanks to @djcard
-
-----
 
 ## [3.4.0] => 2020-JUN-03
 
@@ -54,15 +57,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Access variables according to scopes
 * `$returnType` is not documented #8
 
-----
-
 ## [3.3.1] => 2020-APR-16
 
 ### Fixed
 
 * param the default method when executing via URL instead of setting it.
-
-----
 
 ## [3.3.0] => 2020-JAN-28
 
@@ -85,8 +84,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added new domains for more random generation
 * Removed spacing from words
 
-----
-
 ## [3.2.0] => 2020-JAN-08
 
 ### New Features
@@ -101,14 +98,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * TestBox 3 upgrade
 * More direct scoping of the arguments scope
 
-----
-
 ## [3.1.0] => 2019-MAY-19
 
 * CommandBox ability to execute
 * Template updates to standards
-
-----
 
 ## [3.0.0] => 2018-SEP-4
 
@@ -138,13 +131,9 @@ This will produce top level mock data with 2 books per record.
 * Updated readmes and syntax updates for modern engines
 * Upgraded to new ColdBox module Harness
 
-----
-
 ## [2.4.0]
 
 * Added auto-incrementing ID's FOR REAL this time
-
-----
 
 ## [2.3.0]
 
@@ -156,13 +145,9 @@ This will produce top level mock data with 2 books per record.
 * Bug on `isDefault()` always returning true.
 * Added tests and automation
 
-----
-
 ## [2.2.0]
 
 * Made it a module as well for ColdBox apps.
-
-----
 
 ## [2.0.0]
 
@@ -170,8 +155,6 @@ This will produce top level mock data with 2 books per record.
 * Added CommandBox Support
 * Added Documentation
 * Added ability to execute as a CFC instead of only via web service
-
-----
 
 ## [1.0.0]
 
