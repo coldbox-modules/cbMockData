@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Ortus-Solutions/MockDataCFC.svg?branch=development)](https://travis-ci.org/Ortus-Solutions/MockDataCFC)
+[![Build Status](https://travis-ci.org/coldbox-modules/MockDataCFC.svg?branch=development)](https://travis-ci.org/coldbox-modules/MockDataCFC)
 
 # MockData CFC
 
