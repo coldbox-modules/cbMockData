@@ -93,7 +93,7 @@ component {
 		"Maggiano",
 		"Marquez",
 		"Martin",
-		"Martinez,"
+		"Martinez",
 		"Messi",
 		"Miller",
 		"Moneymaker",
@@ -111,11 +111,11 @@ component {
 		"Stroz",
 		"Taylor",
 		"Thomas",
-		"Thompson,"
+		"Thompson",
 		"Tobias",
 		"Walker",
 		"White",
-		"Williams,"
+		"Williams",
 		"Wilson",
 		"Young",
 		"Zelda",
