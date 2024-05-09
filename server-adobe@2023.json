@@ -1,8 +1,8 @@
 {
-    "name":"mockdatacfc-adobe@2021",
+    "name":"MockDataCFC-adobe@2023",
     "app":{
-        "serverHomeDirectory":".engine/adobe2021",
-        "cfengine":"adobe@2021"
+        "serverHomeDirectory":".engine/adobe2023",
+        "cfengine":"adobe@2023"
     },
     "web":{
         "http":{
@@ -11,15 +11,18 @@
         "rewrites":{
             "enable":"true"
         },
-        "webroot":"test-harness",
-        "aliases":{
+		"webroot": "test-harness",
+		"aliases":{
             "/moduleroot/MockDataCFC":"../"
         }
     },
-    "openBrowser":"false",
-    "cfconfig":{
-        "file":".cfconfig.json"
+    "jvm":{
+        "heapSize":"1024"
     },
+    "openBrowser":"false",
+	"cfconfig": {
+		"file" : ".cfconfig.json"
+	},
     "scripts" : {
         "onServerInstall":"cfpm install zip,debugger"
     }

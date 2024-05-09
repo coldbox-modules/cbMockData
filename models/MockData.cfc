@@ -64,23 +64,40 @@ component {
 	];
 
 	variables._lastNames = [
+		"Allen",
 		"Anderson",
 		"Bearenstein",
 		"Boudreaux",
+		"Brown",
 		"Camden",
 		"Castro",
 		"Clapton",
+		"Clark",
+		"Davis",
 		"Degeneres",
 		"Elias",
 		"Flores",
+		"Garcia",
+		"Hall",
+		"Harris",
 		"Hill",
+		"Jackson",
+		"Johnson",
+		"Jones",
+		"King",
 		"Lainez",
+		"Lee",
+		"Lewis",
 		"Lopez",
 		"Madeiro",
 		"Maggiano",
 		"Marquez",
+		"Martin",
+		"Martinez",
 		"Messi",
+		"Miller",
 		"Moneymaker",
+		"Moore",
 		"Padgett",
 		"Pilato",
 		"Reyes",
@@ -92,37 +109,70 @@ component {
 		"Sharp",
 		"Smith",
 		"Stroz",
+		"Taylor",
+		"Thomas",
+		"Thompson",
 		"Tobias",
+		"Walker",
+		"White",
+		"Williams",
+		"Wilson",
+		"Young",
 		"Zelda"
 	];
 
 	variables._webDomains = [
 		"adobe.com",
+		"amazon.com",
 		"aol.com",
 		"apple.com",
 		"awesome.com",
+		"bitbucket.org",
 		"box.com",
 		"box.io",
 		"box.net",
 		"boxing.com",
-		"example.sv.com",
-		"example.co.uk",
-		"example.jp",
-		"example.edu",
-		"example.com",
-		"example.net",
+		"dropbox.com",
+		"ebay.com",
 		"email.com",
-		"mail.io",
+		"example.co.uk",
+		"example.com",
+		"example.edu",
+		"example.jp",
+		"example.net",
+		"example.sv.com",
+		"facebook.com",
+		"github.com",
 		"gmail.com",
 		"google.com",
+		"hulu.com",
+		"instagram.com",
+		"linkedin.com",
+		"mail.io",
+		"medium.com",
 		"microsoft.com",
 		"msn.com",
-		"ortus.io",
+		"netflix.com",
 		"ortus.com",
-		"sample.io",
-		"sample.edu",
+		"ortus.io",
+		"pinterest.com",
+		"quora.com",
+		"reddit.com",
 		"sample.com",
-		"test.com"
+		"sample.edu",
+		"sample.io",
+		"slack.com",
+		"snapchat.com",
+		"stackoverflow.com",
+		"test.com",
+		"tumblr.com",
+		"twitch.tv",
+		"twitter.com",
+		"udemy.com",
+		"wikipedia.org",
+		"wordpress.com",
+		"yahoo.com",
+		"zoom.us"
 	];
 
 	variables._loremData = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
@@ -143,8 +193,11 @@ component {
 		"age",
 		"all_age",
 		"baconlorem",
+		"boolean",
+		"boolean-digit",
 		"date",
 		"datetime",
+		"datetime-iso",
 		"email",
 		"fname",
 		"gps",
@@ -160,6 +213,9 @@ component {
 	];
 
 	variables._extensions = [
+		".bx",
+		".bxs",
+		".bxm",
 		".cfm",
 		".css",
 		".doc",
@@ -274,6 +330,12 @@ component {
 		if ( arguments.type == "autoincrement" ) {
 			return arguments.index;
 		}
+		if ( arguments.type == "boolean" ) {
+			return randRange( 0, 1 ) > 0 ? true : false;
+		}
+		if ( arguments.type == "boolean-digit" ) {
+			return randRange( 0, 1 );
+		}
 		if ( arguments.type == "ipaddress" ) {
 			return ipAddress();
 		}
@@ -342,6 +404,9 @@ component {
 		}
 		if ( arguments.type == "datetime" ) {
 			return dateRange( showTime = true );
+		}
+		if ( arguments.type == "datetime-iso" ) {
+			return dateRange( showTime = true, dateFormat = "iso" );
 		}
 		if ( arguments.type.findNoCase( "num" ) == 1 ) {
 			return num(
@@ -468,9 +533,10 @@ component {
 	/**
 	 * Generate random words
 	 *
-	 * @size The number of words to generate or can be a min:max range to produce random number of words
+	 * @size      The number of words to generate or can be a min:max range to produce random number of words
+	 * @separator The separtor to use, defaults to empty space
 	 */
-	function words( size = 1 ){
+	function words( size = 1, separator = " " ){
 		// Do we have a random size request?
 		if ( find( ":", arguments.size ) ) {
 			arguments.size = randRange( getToken( arguments.size, 1, ":" ), getToken( arguments.size, 2, ":" ) );
@@ -484,7 +550,7 @@ component {
 				result.append( variables._adjectives[ randRange( 1, variables._adjectives.len() ) ] );
 			}
 		}
-		return result.toList( " " );
+		return result.toList( arguments.separator );
 	}
 
 	/**
@@ -693,20 +759,22 @@ component {
 	 * @to         The end date else defaults to today
 	 * @showTime   Show time in the data
 	 * @dateFormat The date formatting to use
-	 * @timeFormat The time formmating to use
 	 */
 	function dateRange(
 		date from  = "#createDateTime( "2010", "01", "01", "0", "0", "0" )#",
 		date to    = "#now()#",
 		showTime   = false,
-		dateFormat = "medium",
-		timeFormat = "medium"
+		dateFormat = "medium"
 	){
 		var timeDifference = dateDiff( "s", arguments.from, arguments.to );
-		var result         = dateAdd( "s", randRange( 0, timeDifference ), arguments.from );
+		var result         = dateAdd(
+			"s",
+			randRange( 0, timeDifference ),
+			arguments.from
+		);
 
 		if ( arguments.showTime ) {
-			return dateFormat( result, arguments.dateFormat ) & " " & timeFormat( result, arguments.timeFormat );
+			return dateTimeFormat( result, arguments.dateFormat );
 		} else {
 			return dateFormat( result, arguments.dateFormat );
 		}

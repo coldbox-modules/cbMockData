@@ -84,6 +84,21 @@ component extends="coldbox.system.testing.BaseTestCase" appMapping="root" {
 				expect( r[ 1 ].createdOn ).toBeDate();
 			} );
 
+			it( "can generate iso date times", function(){
+				var r = mockDataCFC.mock( createdOn = "datetime-iso" );
+				expect( r[ 1 ].createdOn ).toBeDate();
+			} );
+
+			it( "can generate boolean randomness", function(){
+				var r = mockDataCFC.mock( isActive: "boolean" );
+				expect( r[ 1 ].isActive ).toBeBoolean();
+			} );
+
+			it( "can generate boolean digit randomness", function(){
+				var r = mockDataCFC.mock( isActive: "boolean-digit" );
+				expect( r[ 1 ].isActive ).toBeBoolean();
+			} );
+
 			it( "can generate numbers", function(){
 				var r = mockDataCFC.mock( value = "num" );
 				expect( r[ 1 ].value ).toBeNumeric().toBeLTE( 10 );
