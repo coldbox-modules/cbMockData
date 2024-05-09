@@ -164,7 +164,7 @@ component {
 		"slack.com",
 		"snapchat.com",
 		"stackoverflow.com",
-		"test.com"
+		"test.com",
 		"tumblr.com",
 		"twitch.tv",
 		"twitter.com",
