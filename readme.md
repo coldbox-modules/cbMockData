@@ -132,8 +132,11 @@ The available types MockDataCFC supports are:
 * `all_age`: Generates a random age of 1 to 100.
 * `autoincrement` : Returns an incremented index starting from 1
 * `baconlorem`: Returns bacon lorem ipsum text. If used as `baconlorem:N`, returns N paragraphs. If used as `baconlorem:X:Y`, returns a random number of paragraphs between X and Y.
+* `boolean`: Generates a random boolean value of `true` or `false`.
+* `boolean-digit` : Generates a random boolean value as a digit of 0 or 1.
 * `date`: Generates a random date
 * `datetime`: Generates a random date and time value
+* `datetime-iso` : Generates a random date and time value in ISO format
 * `email`: Generates a random email.
 * `fname`: Generates a random first name.
 * `imageurl` : Generates a random image URL with a random protocol

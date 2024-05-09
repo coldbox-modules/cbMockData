@@ -11,10 +11,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- New type: `boolean` to create random boolean values as `true` or `false`
+- New type: `boolean-digit` to create random boolean values as `1` or `0`
+- New type: `datetime-iso` to create ISO8601 formatted dates
+- Added separators to the `words()` method
 - Build Updates
 - Github actions updates
 - ColdBox 7 auto testing
 - Markdown linting
+- Added more random data
 
 ## [3.6.0] => 2022-SEP-22
 
