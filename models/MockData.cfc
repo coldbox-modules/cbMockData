@@ -118,7 +118,7 @@ component {
 		"Williams",
 		"Wilson",
 		"Young",
-		"Zelda",
+		"Zelda"
 	];
 
 	variables._webDomains = [
@@ -533,7 +533,7 @@ component {
 	/**
 	 * Generate random words
 	 *
-	 * @size The number of words to generate or can be a min:max range to produce random number of words
+	 * @size      The number of words to generate or can be a min:max range to produce random number of words
 	 * @separator The separtor to use, defaults to empty space
 	 */
 	function words( size = 1, separator = " " ){

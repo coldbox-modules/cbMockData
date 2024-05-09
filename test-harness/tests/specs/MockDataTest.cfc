@@ -90,12 +90,12 @@ component extends="coldbox.system.testing.BaseTestCase" appMapping="root" {
 			} );
 
 			it( "can generate boolean randomness", function(){
-				var r = mockDataCFC.mock( isActive : "boolean" );
+				var r = mockDataCFC.mock( isActive: "boolean" );
 				expect( r[ 1 ].isActive ).toBeBoolean();
 			} );
 
 			it( "can generate boolean digit randomness", function(){
-				var r = mockDataCFC.mock( isActive : "boolean-digit" );
+				var r = mockDataCFC.mock( isActive: "boolean-digit" );
 				expect( r[ 1 ].isActive ).toBeBoolean();
 			} );
 
