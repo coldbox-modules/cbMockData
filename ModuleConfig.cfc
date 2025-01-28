@@ -7,20 +7,20 @@
 component {
 
 	// Module Properties
-	this.title              = "MockDataCFC";
+	this.title              = "cbMockData";
 	this.author             = "Luis Majano";
 	this.webURL             = "https://www.ortussolutions.com";
-	this.description        = "MockData is a service to generate fake JSON data";
+	this.description        = "cbMockData is a service to generate fake JSON data";
 	// If true, looks for views in the parent first, if not found, then in the module. Else vice-versa
 	this.viewParentLookup   = true;
 	// If true, looks for layouts in the parent first, if not found, then in module. Else vice-versa
 	this.layoutParentLookup = true;
 	// Module Entry Point
-	this.entryPoint         = "MockDataCFC";
+	this.entryPoint         = "cbMockData";
 	// Model Namespace
-	this.modelNamespace     = "MockDataCFC";
+	this.modelNamespace     = "cbMockData";
 	// CF Mapping
-	this.cfmapping          = "MockDataCFC";
+	this.cfmapping          = "cbMockData";
 
 	/**
 	 * Configure Module

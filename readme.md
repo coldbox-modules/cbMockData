@@ -1,29 +1,32 @@
-[![Build Status](https://travis-ci.org/coldbox-modules/MockDataCFC.svg?branch=development)](https://travis-ci.org/coldbox-modules/MockDataCFC)
+# cbMockData
 
-# MockData CFC
+Welcome to the age of mocking and data modeling.  `cbMockData` allows you to generate fake JSON data as a JSON REST Service, a ColdBox Module or a simple CFC Service API.  The idea being that you may be offline, may not have access to an API, or simply need some fake data to test on your front end or seed a complete database with fake data.  It can also be used as a testing or data migration tool to generate fake data for your application.
 
-> This is a ColdFusion version of the [MockData](https://github.com/cfjedimaster/mockdata) Node.js service.
+`cbMockData` allows you to define the return JSON model in a very deterministic and simple modeling DSL.  You can define the number of objects, the types of data, nested data, and even custom data suppliers.  You can also define the return type as an array of objects or a struct of objects.  Please note that this project is also included as a module in [TestBox](https://www.testbox.run), so you can leverage it in your testing specs.
 
-MockData is a simple service to generate fake JSON data as a JSON REST service, a ColdBox Module or a simple CFC Service API. The idea being that you may be offline, may not have access to an API, or simply need some fake data to test on your front end or seed a complete database with fake data.
-
-MockDataCFC allows you to define the return JSON model in a very deterministic and simple modeling DSL.  Read on :rocket: for some modeling goodness!
+Read on :rocket: for some modeling goodness!
 
 ## Requirements
 
-* ColdFusion 2016+
+* BoxLang 1+
+* ColdFusion 2021+
 * Lucee 5+
 
 ## Installation
 
-Leverage CommandBox and type `box install mockdatacfc`
+Leverage CommandBox and type `box install cbmockdata` to install the module.  Please remember that if you have TestBox installed, you have this module already.
+
+```bash
+box install cbmockdata
+```
 
 ## Usage
 
 Once installed you can leverage it in different ways:
 
-1. **CFC** : Install it into your CFML application, instantiate the `MockData.cfc` and call the `mock` method using the mocking argument DSL: `new mockdatacfc.models.MockData().mock()`.
+1. **CFC** : Install it into your CFML application, instantiate the `MockData.cfc` and call the `mock` method using the mocking argument DSL: `new cbMockData.models.MockData().mock()`.
 2. **REST Service** : Startup a CommandBox server in the root of the package once installed (`box server start`) and execute it via port: `3000`.  You can execute `GET` commands and pass the mocking DSL via the query string or execute a `POST` command with the mocking DSL as the body in JSON.
-3. **ColdBox Module** : Install it via CommandBox in a ColdBox app and hit the service via `/mockdataCFC` with a `GET` using the query string mocking DSL or a `POST` using the mocking DSL as the body in JSON.  You can also get access to the mocking instance via the WireBox ID: `MockData@MockDataCFC` and call the `mock` method using the mocking argument DSL.
+3. **ColdBox Module** : Install it via CommandBox in a ColdBox app and hit the service via `/cbMockData` with a `GET` using the query string mocking DSL or a `POST` using the mocking DSL as the body in JSON.  You can also get access to the mocking instance via the WireBox ID: `MockData@cbMockData` and call the `mock` method using the mocking argument DSL.
 
 ### Customizing the service port
 
@@ -42,7 +45,7 @@ To get data from the REST service, point your XHR or `cfhttp` calls to the follo
 http://localhost:3000/
 
 # ColdBox Module Service
-http://localhost:8080/mockdataCFC
+http://localhost:8080/cbMockData
 ```
 
 By default it will produce a glorious array of 10 objects of nothing! Since we did not specify any modeling data. So let's continue.
@@ -58,10 +61,10 @@ The number of objects to be returned by the service is determined by the `$num` 
 http://localhost:3000/?$num=5
 
 # ColdBox Module Service
-http://localhost:8080/mockdataCFC?$num=5
+http://localhost:8080/cbMockData?$num=5
 
 # object
-var data = getInstance( "MockData@MockDataCFC" )
+var data = getInstance( "MockData@cbMockData" )
     .mock(
         $num = 5
     );
@@ -79,10 +82,10 @@ You can also specify a random return number by using the `rnd` or `rand` suffix 
 http://localhost:3000/?$num=rand:10
 
 # ColdBox Module Service
-http://localhost:8080/mockdataCFC?$num=rand:10
+http://localhost:8080/cbMockData?$num=rand:10
 
 # object
-var data = getInstance( "MockData@MockDataCFC" )
+var data = getInstance( "MockData@cbMockData" )
     .mock(
         $num = "rnd:10:20"
     );
@@ -99,7 +102,7 @@ Available return types:
 
 ```js
 // Method Call
-var data = getInstance( "MockData@MockDataCFC" )
+var data = getInstance( "MockData@cbMockData" )
     .mock(
 		$returnType = "struct",
 		name = "name",
@@ -109,7 +112,7 @@ var data = getInstance( "MockData@MockDataCFC" )
 	);
 
 // Service call
-http://127.0.0.1:60299/MockDataCFC?$returnType=struct&name=name&age=age&id=uuid&email=email
+http://127.0.0.1:60299/cbMockData?$returnType=struct&name=name&age=age&id=uuid&email=email
 ```
 
 The output will be something like this:
@@ -126,7 +129,7 @@ The output will be something like this:
 
 ### Available Mocking Types
 
-The available types MockDataCFC supports are:
+The available types cbMockData supports are:
 
 * `age`: Generates a random "adult" age of 18 to 75.
 * `all_age`: Generates a random age of 1 to 100.
@@ -168,7 +171,7 @@ The available types MockDataCFC supports are:
 
 ### Calling Types By Function Name
 
-Please check out the apidocs at : https://apidocs.ortussolutions.com/#/coldbox-modules/MockDataCFC/ for the latest methods, but you can also use the mocking methods instead of going via the `mock()` method.
+Please check out the apidocs at : https://apidocs.ortussolutions.com/#/coldbox-modules/cbMockData/ for the latest methods, but you can also use the mocking methods instead of going via the `mock()` method.
 
 * `baconLorem()`
 * `dateRange()`
@@ -217,7 +220,7 @@ In order to define the type of data returned, you must specify one or more addit
 http://localhost:3000/?$num=3&author=name
 
 # object
-var data = getInstance( "MockData@MockDataCFC" )
+var data = getInstance( "MockData@cbMockData" )
     .mock(
         $num = 3,
         "author" = "name"
@@ -246,7 +249,7 @@ Additional fields for the object model can just be appended to the URL or method
 http://localhost:3000/?$num=3&author=name&gender=oneof:male:female
 
 # object
-var data = getInstance( "MockData@MockDataCFC" )
+var data = getInstance( "MockData@cbMockData" )
     .mock(
         $num = 3,
         "author" = "name",
@@ -275,7 +278,7 @@ Which gives...
 
 ### Nested Data
 
-Since version `v3.0.0`, MockDataCFC supports the nesting of the field models to represent rich and complex JSON return structures.  We currently support the following nested types:
+Since version `v3.0.0`, cbMockData supports the nesting of the field models to represent rich and complex JSON return structures.  We currently support the following nested types:
 
 * array of objects - `name = [ { ... } ]`
 * array of values - `name = [ { $type = "" } ]`
@@ -294,7 +297,7 @@ Author
 I can then use this mocking DSL to define it:
 
 ```js
-getInstance( "MockData@MockDataCFC" )
+getInstance( "MockData@cbMockData" )
     .mock(
 
         fullName    = "name",

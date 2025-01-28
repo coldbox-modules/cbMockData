@@ -116,7 +116,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Introduction of nested mocking. You can now declare nested mocks as structs and the mock data will nest accordingly:
 
 ```js
-getInstance( "MockData@MockDataCFC" )
+getInstance( "MockData@cbMockData" )
 	.mock(
 		books=[{
 			num=2,

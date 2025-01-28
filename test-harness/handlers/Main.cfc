@@ -1,7 +1,7 @@
 ﻿component{
 
 	function index( event, rc, prc ){
-		return getInstance( "MockData@MockDataCFC" )
+		return getInstance( "MockData@cbMockData" )
 			.mock(
 				testSupplier = function( index ){
 					return "hello#arguments.index#";
