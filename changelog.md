@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.0.0] - 2025-01-28
+
 ## [3.7.0] - 2024-05-09
 
 ### Added
@@ -181,6 +183,6 @@ This will produce top level mock data with 2 books per record.
 
 - Original by Ray Camden
 
-[Unreleased]: https://github.com/coldbox-modules/MockDataCFC/compare/v3.7.0...HEAD
-
+[unreleased]: https://github.com/coldbox-modules/cbMockData/compare/v4.0.0...HEAD
+[4.0.0]: https://github.com/coldbox-modules/cbMockData/compare/v3.7.0...v4.0.0
 [3.7.0]: https://github.com/coldbox-modules/MockDataCFC/compare/c78c01b939bde5a9396bff90a4bf8d34073ddf98...v3.7.0
