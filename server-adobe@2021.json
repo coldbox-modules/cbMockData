@@ -1,5 +1,5 @@
 {
-    "name":"mockdatacfc-adobe@2021",
+    "name":"cbMockData-adobe@2021",
     "app":{
         "serverHomeDirectory":".engine/adobe2021",
         "cfengine":"adobe@2021"
@@ -13,7 +13,7 @@
         },
         "webroot":"test-harness",
         "aliases":{
-            "/moduleroot/MockDataCFC":"../"
+            "/moduleroot/cbMockData":"../"
         }
     },
     "openBrowser":"false",

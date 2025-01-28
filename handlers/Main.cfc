@@ -4,7 +4,7 @@
 component extends="coldbox.system.EventHandler" {
 
 	// DI
-	property name="mockData" inject="MockData@MockDataCFC";
+	property name="mockData" inject="MockData@cbMockData";
 
 	/**
 	 * Index service

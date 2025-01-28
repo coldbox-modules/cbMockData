@@ -5,8 +5,8 @@
 component {
 
 	// UPDATE THE NAME OF THE MODULE IN TESTING BELOW
-	request.MODULE_NAME = "MockDataCFC";
-	request.MODULE_PATH = "MockDataCFC";
+	request.MODULE_NAME = "cbMockData";
+	request.MODULE_PATH = "cbMockData";
 
 	// APPLICATION CFC PROPERTIES
 	this.name                 = "ColdBoxTestingSuite";

@@ -5,30 +5,47 @@ on:
     branches:
       - 'development'
 
+# Cancel running builds if another push to branch is made while this build is running
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  MODULE_ID: ${{ github.event.repository.name }}
+  JDK_VERSION: 21
+
 jobs:
-  ##########################################################################################
-  # Module Tests
-  ##########################################################################################
+  #############################################
+  # Tests First baby! We fail, no build :(
+  #############################################
   tests:
     secrets: inherit
     uses: ./.github/workflows/tests.yml
+    permissions:
+      checks: write
+      pull-requests: write
+      contents: read
+      issues: read
 
   ##########################################################################################
   # Format Source Code
   ##########################################################################################
   format:
     name: Code Auto-Formatting
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      checks: write
     steps:
       - uses: actions/checkout@v4
 
       - name: Auto-format
-        uses: Ortus-Solutions/commandbox-action@v1.0.2
+        uses: Ortus-Solutions/commandbox-action@v1.0.3
         with:
           cmd: run-script format
 
       - name: Commit Format Changes
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Apply cfformat changes
 
@@ -39,5 +56,10 @@ jobs:
     uses: ./.github/workflows/release.yml
     needs: [ tests, format ]
     secrets: inherit
+    permissions:
+      checks: write
+      pull-requests: write
+      contents: write
+      issues: write
     with:
       snapshot: true

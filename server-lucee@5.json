@@ -1,5 +1,5 @@
 {
-    "name":"mockdatacfc-lucee@5",
+    "name":"cbMockData-lucee@5",
     "app":{
         "serverHomeDirectory":".engine/lucee5",
         "cfengine":"lucee@5"
@@ -13,7 +13,7 @@
         },
         "webroot":"test-harness",
         "aliases":{
-            "/moduleroot/MockDataCFC":"../"
+            "/moduleroot/cbMockData":"../"
         }
     },
     "openBrowser":"false",
