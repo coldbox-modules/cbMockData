@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Tests to update patterns instead of exact matches
 - Refactored to `cbMockData` namespace
 
 ## [3.7.0] => 2024-MAY-09

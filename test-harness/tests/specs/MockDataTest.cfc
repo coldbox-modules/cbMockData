@@ -66,7 +66,8 @@ component extends="coldbox.system.testing.BaseTestCase" appMapping="root" {
 
 			it( "can generate ssn", function(){
 				var r = cbMockData.mock( ssn = "ssn" );
-				expect( r[ 1 ].ssn ).toBeSSN();
+				// Expect to match the pattern xxx-xx-xxxx, safer since it's mock data
+				expect( r[ 1 ].ssn ).toMatch( "^\d{3}-\d{2}-\d{4}$" );
 			} );
 
 			it( "can generate telephones", function(){
