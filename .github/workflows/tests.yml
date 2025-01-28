@@ -27,8 +27,8 @@ jobs:
         experimental: [ false ]
         include:
         # Adobe 2021 JDK11
-          - coldboxVersion: "^7.0.0"
-            cfengine: "adobe@2021"
+          - cfengine: "adobe@2021"
+            coldboxVersion: "^7.0.0"
             jdkVersion: 11
             experimental: false
         # Bleeding Edge Tests
