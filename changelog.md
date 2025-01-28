@@ -5,9 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-----
+* * *
 
 ## [Unreleased]
+
+## [4.0.0] - 2025-01-28
+
+## [3.7.0] - 2024-05-09
 
 ### Added
 
@@ -178,3 +182,7 @@ This will produce top level mock data with 2 books per record.
 ## [1.0.0]
 
 - Original by Ray Camden
+
+[unreleased]: https://github.com/coldbox-modules/cbMockData/compare/v4.0.0...HEAD
+[4.0.0]: https://github.com/coldbox-modules/cbMockData/compare/v3.7.0...v4.0.0
+[3.7.0]: https://github.com/coldbox-modules/MockDataCFC/compare/c78c01b939bde5a9396bff90a4bf8d34073ddf98...v3.7.0
