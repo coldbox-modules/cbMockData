@@ -69,7 +69,7 @@ jobs:
         uses: Ortus-Solutions/setup-commandbox@v2.0.1
 
       - name: Update Commandbox Boxlang Module
-        if: ${{ matrix.cfengine == 'boxlang@1'
+        if: ${{ matrix.cfengine == 'boxlang@1' }}
         run:
           box install --force commandbox-boxlang
 
