@@ -6,10 +6,8 @@ on:
       - "main"
       - "master"
       - "development"
-      - "releases/v*"
   pull_request:
     branches:
-      - "releases/v*"
       - development
 
 jobs:
@@ -25,6 +23,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - uses: Ortus-Solutions/commandbox-action@v1.0.3
+      - uses: Ortus-Solutions/commandbox-action@v1.0.2
         with:
           cmd: run-script format:check

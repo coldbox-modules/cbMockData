@@ -1,4 +1,4 @@
-name: Release
+name: Build a Release
 
 on:
   # If you push to master|main this will trigger a stable release
@@ -18,7 +18,6 @@ on:
 
   # Manual Trigger
   workflow_dispatch:
-
 env:
   MODULE_ID: ${{ github.event.repository.name }}
   JDK: 21
@@ -134,10 +133,9 @@ jobs:
           box forgebox publish --force
 
       - name: Create Github Release
-        uses: taiki-e/create-gh-release-action@v1.8.0
+        uses: taiki-e/create-gh-release-action@v1.8.2
         continue-on-error: true
         if: env.SNAPSHOT == 'false'
-        id: create_release
         with:
           title: ${{ env.VERSION }}
           changelog: changelog.md
