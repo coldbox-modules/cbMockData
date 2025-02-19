@@ -1,4 +1,8 @@
 {
+	"name":"cbMockDataService",
+	"app":{
+        "cfengine":"boxlang@1"
+    },
     "web":{
         "http":{
             "port":3000
@@ -6,5 +10,15 @@
         "rewrites":{
             "enable":true
         }
+    },
+	"JVM":{
+        "heapSize":"512",
+        "javaVersion":"openjdk21_jre"
+    },
+	"env":{
+        "BOXLANG_DEBUG": false
+    },
+	"scripts":{
+        "onServerInitialInstall":"install bx-compat-cfml --noSave"
     }
 }

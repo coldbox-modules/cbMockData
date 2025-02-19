@@ -5,34 +5,27 @@ on:
     branches:
       - 'development'
 
-# Cancel running builds if another push to branch is made while this build is running
+  workflow_dispatch:
+
+# Unique group name per workflow-branch/tag combo
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
-env:
-  MODULE_ID: ${{ github.event.repository.name }}
-  JDK_VERSION: 21
-
 jobs:
-  #############################################
-  # Tests First baby! We fail, no build :(
-  #############################################
+  ##########################################################################################
+  # Module Tests
+  ##########################################################################################
   tests:
     secrets: inherit
     uses: ./.github/workflows/tests.yml
-    permissions:
-      checks: write
-      pull-requests: write
-      contents: read
-      issues: read
 
   ##########################################################################################
   # Format Source Code
   ##########################################################################################
   format:
     name: Code Auto-Formatting
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: write
       checks: write
@@ -40,7 +33,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Auto-format
-        uses: Ortus-Solutions/commandbox-action@v1.0.3
+        uses: Ortus-Solutions/commandbox-action@v1.0.2
         with:
           cmd: run-script format
 
