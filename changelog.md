@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - BoxLang certification
 - Updated github actions
+- BoxLang as the default server for the RESTFul service
 
 ## [4.0.0] - 2025-01-28
 
